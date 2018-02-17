@@ -2,9 +2,9 @@
 
 # Description:
 
-# Student's Name:
+# Student's Name: Samuel B. Dillon
 
-# Student's UT EID:
+# Student's UT EID: SBD584
 
 # Partner's Name:
 
@@ -12,11 +12,11 @@
 
 # Course Name: CS 313E
 
-# Unique Number:
+# Unique Number: 51335
 
-# Date Created:
+# Date Created: February 14th, 2018
 
-# Date Last Modified:
+# Date Last Modified:  February 18th, 2018
 
 import  random
 
@@ -118,7 +118,7 @@ class Player (object):
 
   # complete the code so that the cards and points are printed
   def __str__ (self):
-    ...
+    return self.cards_ and self.getPoints())
 
 # Dealer class inherits from the Player class
 class Dealer (Player):
@@ -160,7 +160,7 @@ class Blackjack (object):
   def play (self):
     # Print the cards that each player has
     for i in range (self.numPlayers):
-      print ('Player ' + str(i + 1) + ': ' + (self.Players[i]))
+      print ('Player ' + str(i + 1) + ': ' + self.Players[i])
 
     # Print the cards that the dealer has
     print ('Dealer: ' + self.dealer)
@@ -188,19 +188,24 @@ class Blackjack (object):
     # determine the outcome; you will have to re-write the code
     # it was written for just one player having playerPoints
     # do not output result for dealer
-    if dealerPoints > 21:
-      print ('Dealer loses')
-    elif dealerPoints > playerPoints:
-      print ('Dealer wins')
-    elif (dealerPoints < playerPoints and playerPoints <= 21):
-      print ('Player wins')
-    elif dealerPoints == playerPoints:
-      if self.player.hasBlackjack() and not self.dealer.hasBlackjack():
-        print ('Player wins')
-      elif not self.player.hasBlackjack() and self.dealer.hasBlackjack():
+
+    for i in range (self.numPlayers):
+      if (self.Players[i]).getPoints() > 21:
+        print ('Player ' + str(i + 1) + ' loses')
+      elif dealerPoints > 21:
+        print ('Dealer loses')
+      elif dealerPoints > (self.Players[i]).getPoints():
         print ('Dealer wins')
-      else:
-        print ('There is a tie')
+      elif dealerPoints < (self.Players[i]).getPoints():
+        print ('Player wins')
+      elif dealerPoints == playerPoints:
+        if (self.Players[i]).hasBlackjack() and not self.dealer.hasBlackjack():
+          print ('Player wins')
+        elif not (self.Players[i]).hasBlackjack() and self.dealer.hasBlackjack():
+          print ('Dealer wins')
+        else:
+          print ('There is a tie')
+
 
 def main ():
   numPlayers = eval (input ('Enter number of players: '))
