@@ -6,17 +6,17 @@
 
 # Student's UT EID:
 
-# Partner's Name: LC
+# Partner's Name: L
 
-# Partner's UT EID: 3 7
+# Partner's UT EID: 3
 
 # Course Name: CS 313E
 
-# Unique Number: 51335
+# Unique Number: 51335 & 51340
 
 # Date Created: February 14th, 2018
 
-# Date Last Modified:  February 17th, 2018
+# Date Last Modified:  February 18th, 2018
 
 import  random
 
@@ -173,24 +173,28 @@ class Blackjack (object):
 
     # Each player hits until he says no
     playerPoints = []
+    checker = True
+    
     for i in range (self.numPlayers):
-      while True:
-        choice = input ('do you want to hit? [y / n]: ')
+      while (checker):
+        choice = input ('Player ' + str(i + 1) + ', do you want to hit? [y / n]: ')
         if choice in ('y', 'Y'):
           (self.Players[i]).hit (self.deck.deal())
           points = (self.Players[i]).getPoints()
           print ('Player ' + str(i + 1) + ': ' + str(self.Players[i]))
           if (points >= 21):
-            break
+            print()
+            checker = False
         else:
           print()
-          break
+          checker = False
       playerPoints.append ((self.Players[i]).getPoints())
 
     # Dealer's turn to hit
     self.dealer.hit (self.deck)
     dealerPoints = self.dealer.getPoints()
     print ('Dealer: ' + str(self.dealer))
+    print()
 
     # determine the outcome; you will have to re-write the code
     # it was written for just one player having playerPoints
@@ -216,8 +220,10 @@ class Blackjack (object):
 
 def main ():
   numPlayers = eval (input ('Enter number of players: '))
+  print()
   while (numPlayers < 1 or numPlayers > 6):
     numPlayers = eval (input ('Enter number of players: '))
+    print()
   game = Blackjack (numPlayers)
   game.play()
 
