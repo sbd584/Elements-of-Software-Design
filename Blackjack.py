@@ -6,7 +6,7 @@
 
 # Student's UT EID:
 
-# Partner's Name: 
+# Partner's Name:
 
 # Partner's UT EID:
 
@@ -213,10 +213,10 @@ class Blackjack (object):
         print ('Player ' + str(i + 1) + ' wins')
         print()
       elif dealerPoints == playerPoints:
-        if (self.Players[i]).hasBlackjack() and not self.dealer.hasBlackjack():
+        if (((self.Players[i]).hasBlackjack()) and (not self.dealer.hasBlackjack())):
           print ('Player ' + str(i + 1) + ' wins')
           print()
-        elif not (self.Players[i]).hasBlackjack() and self.dealer.hasBlackjack():
+        elif ((not (self.Players[i]).hasBlackjack()) and (self.dealer.hasBlackjack())):
           print ('Dealer wins: Beating Player ' + str(i + 1))
           print()
         else:
