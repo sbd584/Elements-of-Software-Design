@@ -2,9 +2,9 @@
 
 # Description: Assignment No. 5 — Playing a Blackjack game
 
-# Student's Name: Samuel B. Dillon
+# Student's Name: S
 
-# Student's UT EID: SBD584
+# Student's UT EID: D
 
 # Partner's Name: LC
 
@@ -122,7 +122,7 @@ class Player (object):
     for i in range (len(self.cards)):
       player_points += str(self.cards[i]) + " "
     player_points += "- " + str(self.getPoints())
-    
+
     return player_points + " points"
 
 # Dealer class inherits from the Player class
@@ -204,14 +204,14 @@ class Blackjack (object):
       elif dealerPoints > (self.Players[i]).getPoints():
         print ('Dealer wins')
       elif dealerPoints < (self.Players[i]).getPoints():
-        print ('Player wins')
+        print ('Player ' + str(i + 1) + ' wins')
       elif dealerPoints == playerPoints:
         if (self.Players[i]).hasBlackjack() and not self.dealer.hasBlackjack():
-          print ('Player wins')
+          print ('Player ' + str(i + 1) + ' wins')
         elif not (self.Players[i]).hasBlackjack() and self.dealer.hasBlackjack():
           print ('Dealer wins')
         else:
-          print ('There is a tie')
+          print ('Player ' + str(i + 1) + ' ties')
 
 
 def main ():
