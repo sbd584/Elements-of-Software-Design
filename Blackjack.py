@@ -166,7 +166,6 @@ class Blackjack (object):
     # Print the cards that each player has
     for i in range (self.numPlayers):
       print ('Player ' + str(i + 1) + ': ' + str(self.Players[i]))
-      print()
 
     # Print the cards that the dealer has
     print ('Dealer: ' + str(self.dealer))
@@ -176,7 +175,7 @@ class Blackjack (object):
     playerPoints = []
     for i in range (self.numPlayers):
       while True:
-        choice = input ('Player ' + str(i + 1) + ' ,do you want to hit? [y / n]: ')
+        choice = input ('Player ' + str(i + 1) + ', do you want to hit? [y / n]: ')
         if choice in ('y', 'Y'):
           (self.Players[i]).hit (self.deck.deal())
           points = (self.Players[i]).getPoints()
@@ -202,36 +201,29 @@ class Blackjack (object):
     for i in range (self.numPlayers):
       if (self.Players[i]).getPoints() > 21:
         print ('Dealer wins: Beating Player ' + str(i + 1))
-        print()
       elif dealerPoints > 21:
         print ('Player ' + str(i + 1) + ' wins')
-        print()
       elif dealerPoints > (self.Players[i]).getPoints():
         print ('Dealer wins: Beating Player ' + str(i + 1))
-        print()
       elif dealerPoints < (self.Players[i]).getPoints():
         print ('Player ' + str(i + 1) + ' wins')
-        print()
       elif dealerPoints == playerPoints:
         if (((self.Players[i]).hasBlackjack()) and (not self.dealer.hasBlackjack())):
           print ('Player ' + str(i + 1) + ' wins')
-          print()
         elif ((not (self.Players[i]).hasBlackjack()) and (self.dealer.hasBlackjack())):
           print ('Dealer wins: Beating Player ' + str(i + 1))
-          print()
         else:
           print ('Player ' + str(i + 1) + ' ties')
-          print()
 
 
 def main ():
-  print()
   numPlayers = eval (input ('Enter number of players: '))
   print()
   while (numPlayers < 1 or numPlayers > 6):
-    print()
     numPlayers = eval (input ('Enter number of players: '))
+    print()
   game = Blackjack (numPlayers)
   game.play()
 
 main()
+
