@@ -2,9 +2,9 @@
 
 # Description: Assignment No. 5 — Playing a Blackjack game
 
-# Student's Name: S
+# Student's Name: Samuel B. Dillon
 
-# Student's UT EID: D
+# Student's UT EID: SBD584
 
 # Partner's Name: LC
 
@@ -200,16 +200,16 @@ class Blackjack (object):
       if (self.Players[i]).getPoints() > 21:
         print ('Player ' + str(i + 1) + ' loses')
       elif dealerPoints > 21:
-        print ('Dealer loses')
+        print ('Player ' + str(i + 1) + ' wins')
       elif dealerPoints > (self.Players[i]).getPoints():
-        print ('Dealer wins')
+        print ('Dealer wins: Beating Player ' + str(i + 1))
       elif dealerPoints < (self.Players[i]).getPoints():
         print ('Player ' + str(i + 1) + ' wins')
       elif dealerPoints == playerPoints:
         if (self.Players[i]).hasBlackjack() and not self.dealer.hasBlackjack():
           print ('Player ' + str(i + 1) + ' wins')
         elif not (self.Players[i]).hasBlackjack() and self.dealer.hasBlackjack():
-          print ('Dealer wins')
+          print ('Dealer wins: Beating Player ' + str(i + 1))
         else:
           print ('Player ' + str(i + 1) + ' ties')
 
