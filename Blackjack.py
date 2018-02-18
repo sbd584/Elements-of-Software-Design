@@ -2,9 +2,9 @@
 
 # Description: Assignment No. 5 — Playing a Blackjack game
 
-# Student's Name: Samuel B. Dillon
+# Student's Name: 
 
-# Student's UT EID: SBD584
+# Student's UT EID: 
 
 # Partner's Name: LC
 
