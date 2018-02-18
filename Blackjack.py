@@ -169,6 +169,7 @@ class Blackjack (object):
 
     # Print the cards that the dealer has
     print ('Dealer: ' + str(self.dealer))
+    print()
 
     # Each player hits until he says no
     playerPoints = []
@@ -179,16 +180,17 @@ class Blackjack (object):
           (self.Players[i]).hit (self.deck.deal())
           points = (self.Players[i]).getPoints()
           print ('Player ' + str(i + 1) + ': ' + str(self.Players[i]))
-          if points >= 21:
+          if (points >= 21):
             break
         else:
+          print()
           break
       playerPoints.append ((self.Players[i]).getPoints())
 
     # Dealer's turn to hit
     self.dealer.hit (self.deck)
     dealerPoints = self.dealer.getPoints()
-    print ('Dealer: ' + str(self.dealer) + ' - ' + str(dealerPoints)) + " points"
+    print ('Dealer: ' + str(self.dealer))
 
     # determine the outcome; you will have to re-write the code
     # it was written for just one player having playerPoints
