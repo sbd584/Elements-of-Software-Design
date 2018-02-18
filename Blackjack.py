@@ -2,9 +2,9 @@
 
 # Description: Assignment No. 5 — Playing a Blackjack game
 
-# Student's Name: 
+# Student's Name:
 
-# Student's UT EID: 
+# Student's UT EID:
 
 # Partner's Name: LC
 
