@@ -1,6 +1,6 @@
 # File: Blackjack.py
 
-# Description:
+# Description: Assignment No. 5 — Playing a Blackjack game
 
 # Student's Name: Samuel B. Dillon
 
