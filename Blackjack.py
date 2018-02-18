@@ -6,9 +6,9 @@
 
 # Student's UT EID: SBD584
 
-# Partner's Name:
+# Partner's Name: LC
 
-# Partner's UT EID:
+# Partner's UT EID: 3 7
 
 # Course Name: CS 313E
 
@@ -16,7 +16,7 @@
 
 # Date Created: February 14th, 2018
 
-# Date Last Modified:  February 18th, 2018
+# Date Last Modified:  February 17th, 2018
 
 import  random
 
@@ -118,7 +118,12 @@ class Player (object):
 
   # complete the code so that the cards and points are printed
   def __str__ (self):
-    return self.cards_ and self.getPoints())
+    player_points = ""
+    for i in range (len(self.cards)):
+      player_points += str(self.cards[i]) + " "
+    player_points += str(self.getPoints())
+    
+    return player_points
 
 # Dealer class inherits from the Player class
 class Dealer (Player):
@@ -160,14 +165,14 @@ class Blackjack (object):
   def play (self):
     # Print the cards that each player has
     for i in range (self.numPlayers):
-      print ('Player ' + str(i + 1) + ': ' + self.Players[i])
+      print ('Player ' + str(i + 1) + ': ' + str(self.Players[i]))
 
     # Print the cards that the dealer has
-    print ('Dealer: ' + self.dealer)
+    print ('Dealer: ' + str(self.dealer))
 
     # Each player hits until he says no
     playerPoints = []
-    for i in range (numPlayers):
+    for i in range (self.numPlayers):
       while True:
         choice = input ('do you want to hit? [y / n]: ')
         if choice in ('y', 'Y'):
@@ -183,7 +188,7 @@ class Blackjack (object):
     # Dealer's turn to hit
     self.dealer.hit (self.deck)
     dealerPoints = self.dealer.getPoints()
-    print ('Dealer: ' + self.dealer + ' - ' + str(dealerPoints))
+    print ('Dealer: ' + str(self.dealer) + ' - ' + str(dealerPoints))
 
     # determine the outcome; you will have to re-write the code
     # it was written for just one player having playerPoints
