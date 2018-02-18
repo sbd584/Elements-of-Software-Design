@@ -121,9 +121,9 @@ class Player (object):
     player_points = ""
     for i in range (len(self.cards)):
       player_points += str(self.cards[i]) + " "
-    player_points += str(self.getPoints())
+    player_points += "- " + str(self.getPoints())
     
-    return player_points
+    return player_points + " points"
 
 # Dealer class inherits from the Player class
 class Dealer (Player):
@@ -178,7 +178,7 @@ class Blackjack (object):
         if choice in ('y', 'Y'):
           (self.Players[i]).hit (self.deck.deal())
           points = (self.Players[i]).getPoints()
-          print ('Player ' + str(i + 1) + ': ' + self.Players[i])
+          print ('Player ' + str(i + 1) + ': ' + str(self.Players[i]))
           if points >= 21:
             break
         else:
@@ -188,7 +188,7 @@ class Blackjack (object):
     # Dealer's turn to hit
     self.dealer.hit (self.deck)
     dealerPoints = self.dealer.getPoints()
-    print ('Dealer: ' + str(self.dealer) + ' - ' + str(dealerPoints))
+    print ('Dealer: ' + str(self.dealer) + ' - ' + str(dealerPoints)) + " points"
 
     # determine the outcome; you will have to re-write the code
     # it was written for just one player having playerPoints
