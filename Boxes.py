@@ -23,23 +23,21 @@
 def does_fit (box1, box2):
   return (box1[0] < box2[0]) and (box1[1] < box2[1]) and (box1[2] < box2[2])
 
-def getAllSubsets(a,b,lo,size_nested_boxes,d):
+def subsets(a, b, lo, size_nested_boxes, d):
   hi = len(a)
   if (lo == hi):
     if b != []:
       if (len(b) == size_nested_boxes):
-        #for i in range(len(a)):
         if (does_fit(b[0],b[1]) and does_fit(b[1],b[2]) and does_fit(b[2],b[3])):
-          print(b)
-          #d.append(b)
-          #print()
-        #d.append(b)
+          for i in range(len(b)):
+              print(b[i])
+          print()
         return
   else:
     c = b[:]
     b.append (a[lo])
-    getAllSubsets (a, c, lo + 1,size_nested_boxes, d)
-    getAllSubsets (a, b, lo + 1,size_nested_boxes, d)
+    subsets (a, c, lo + 1,size_nested_boxes, d)
+    subsets (a, b, lo + 1,size_nested_boxes, d)
 
 def main():
   # open file for reading
@@ -69,7 +67,6 @@ def main():
 
   # sort the box list
   box_list.sort()
-  #print (box_list)
 
   # create a list that will hold the nested boxes
   nested_boxes = []
@@ -79,6 +76,6 @@ def main():
 
   # get all subsets of boxes
   # for each subset check if they all fit
-  getAllSubsets (box_list,nested_boxes,0,size_nested_boxes,box_list2)
+  subsets (box_list, nested_boxes, 0, size_nested_boxes, box_list2)
 
 main()
