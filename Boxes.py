@@ -73,9 +73,21 @@ def main():
 
   # create a variable for the size of the nested boxes
   size_nested_boxes = 4
+  
+  # check the maximum length of the boxes
+  max_length = 1
+    for i in nested_boxes:
+        if (len(i) > max_length):
+            max_length = len(i)
 
   # get all subsets of boxes
-  # for each subset check if they all fit
-  subsets (box_list, nested_boxes, 0, size_nested_boxes, box_list2)
+  # for each subset check if they all fit and print
+  # also making sure that only those larger than 2 are printed out
+  if(max_length >= 2):
+    print("Largest Subset of Nesting Boxes")
+    subsets (box_list, nested_boxes, 0, size_nested_boxes, box_list2)
+    
+  else:
+    print("No Nesting Boxes")
 
 main()
