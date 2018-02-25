@@ -12,7 +12,7 @@
 
 #  Course Name: CS 313E
 
-#  Unique Number: 51335 
+#  Unique Number: 51335
 
 #  Unique Number: 51340
 
@@ -22,6 +22,22 @@
 
 def does_fit (box1, box2):
   return (box1[0] < box2[0]) and (box1[1] < box2[1]) and (box1[2] < box2[2])
+
+def getAllSubsets(a,b,lo,size_nested_boxes,d):
+  hi = len(a)
+  if (lo == hi):
+    if b != []:
+      if (len(b) == size_nested_boxes):
+        for i in range(len(a)):
+          if (does_fit(a[i],a[i+1])):
+            print(b)
+        #d.append(b)
+          return
+  else:
+    c = b[:]
+    b.append (a[lo])
+    subsets (a, c, lo + 1, d)
+    subsets (a, b, lo + 1, d)
 
 def main():
   # open file for reading
@@ -34,6 +50,7 @@ def main():
 
   # create empty list of boxes
   box_list = []
+  box_list2 = []
 
   # read the list of boxes from file
   for i in range (num_boxes):
@@ -53,23 +70,22 @@ def main():
   print (box_list)
 
   # create a list that will hold the nested boxes
-  nested_boxes[]
+  nested_boxes = []
 
   # create a variable for the size of the nested boxes
+  size_nested_boxes = 3
   max_length = 1
 
-    # Go through all sets of nesting boxes and find ones with maximum length
-  for entry in nested_boxes:
-    if len(entry) > max_length:
-      max_length = len(entry)
-
   # get all subsets of boxes
-
+  getAllSubsets (box_list,nested_boxes,0,size_nested_boxes,box_list2)
 
   # for each subset check if they all fit
 
+
+  #for i in nested_boxes
+
   # add to list
-  print(nested_boxes)
+  # print(nested_boxes)
 
 
 main()
