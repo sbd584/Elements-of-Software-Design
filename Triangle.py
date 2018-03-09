@@ -74,8 +74,7 @@ def dynamic_prog (grid):
 
   for i in range(len(grid) - 2, -1, -1):
     for j in range(i + 1):
-      grid.append(grid[i][j] + max(grid[i + 1][j]), grid[i + 1][j + 1])
-
+      grid[i][j] = int(grid[i][j]) + max(int(grid[i + 1][j]), int(grid[i + 1][j + 1]))
   return grid[0][0]
 
 # reads the file and returns a 2-D list that represents the triangle CHECK THIS LCODE
