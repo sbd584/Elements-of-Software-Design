@@ -40,7 +40,6 @@ def exhaustive_search (grid):
 
 # returns the greatest path sum using greedy approach
 def greedy (grid):
-
   index = 0
   j = 0
 
@@ -54,7 +53,8 @@ def greedy (grid):
 
   j += grid[i + 1][index]
 
-  return grid[i + 1][j]
+  print("The greatest path sum through the greedy approach is ",format(j),".")
+  return
 
 # returns the greatest path sum using divide and conquer (recursive) approach
 def rec_search (grid, i, j):
@@ -114,11 +114,11 @@ def main ():
 
   ti = time.time()
   # output greates path from greedy approach
+  greedy(grid)
   tf = time.time()
   del_t = tf - ti
   # print time taken using greedy approach
-  ##print("The greatest path sum through the greedy approach is ", int(dynamic_prog(grid)), ".")
-  ##print("The time taken for the greedy approach is", del_t, "seconds.")
+  print("The time taken for the greedy approach is", del_t, "seconds.")
 
   #The greatest path sum through greedy search is 23.
   #The time taken for greedy approach is x seconds.
