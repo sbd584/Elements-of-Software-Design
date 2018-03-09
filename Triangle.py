@@ -75,7 +75,8 @@ def dynamic_prog (grid):
   for i in range(len(grid) - 2, -1, -1):
     for j in range(i + 1):
       grid[i][j] = int(grid[i][j]) + max(int(grid[i + 1][j]), int(grid[i + 1][j + 1]))
-  return grid[0][0]
+  print("The greatest path sum through dynamic programming is {}.".format(grid[0][0]))
+  return #grid[0][0] int(dynamic_prog(grid))
 
 # reads the file and returns a 2-D list that represents the triangle CHECK THIS LCODE
 def read_file (in_file):
@@ -132,13 +133,13 @@ def main ():
   ##print("The greatest path sum through divide-and-conquer is ", r_max, ".")
   ##print("The time taken for divide-and-conquer is", del_t, "seconds.")
 
-  ##ti = time.time()
+  ti = time.time()
   #output greates path from dynamic programming
   dynamic_prog(grid)
   tf = time.time()
   del_t = tf - ti
   # print time taken using dynamic programming
-  print("The greatest path sum through dynamic programming is ", int(dynamic_prog(grid)), ".")
+  #print("The greatest path sum through dynamic programming is ", int(dynamic_prog(grid)), ".")
   print("The time taken for dynamic programming is", del_t, "seconds.")
 
 if __name__ == "__main__":
