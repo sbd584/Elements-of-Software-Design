@@ -31,12 +31,14 @@ def exhaustive_search (grid):
 
     if (i == len(grid)):
       b.append(c)
-  else:
-    c += grid[j][i]
-    if (i == 0):
-      return exhaustive_search(grid, i + 1, j + 1, b, c)
-
-    return exhaustive_search(grid, i, j + 1, b, c)
+    else:
+        c += grid[j][i]
+        if (i == 0):
+            return exhaustive_search(grid, i + 1, j + 1, b, c)
+        return exhaustive_search(grid, i, j + 1, b, c)
+  #print()
+  #print("The greatest path sum through exhaustive search approach is ",format(j),".")
+  #return
 
 # returns the greatest path sum using greedy approach
 def greedy (grid):
@@ -53,6 +55,7 @@ def greedy (grid):
 
   j += grid[i + 1][index]
 
+  print()
   print("The greatest path sum through the greedy approach is ",format(j),".")
   return
 
@@ -68,6 +71,9 @@ def rec_search (grid, i, j):
     i = max(grid1, grid2) + int(grid[i][j])
 
   return i
+  #print()
+  #print("The greatest path sum through divide and conquer search approach is ",format(j),".")
+  #return
 
 # returns the greatest path sum and the new grid using dynamic programming
 def dynamic_prog (grid):
@@ -75,6 +81,8 @@ def dynamic_prog (grid):
   for i in range(len(grid) - 2, -1, -1):
     for j in range(i + 1):
       grid[i][j] = int(grid[i][j]) + max(int(grid[i + 1][j]), int(grid[i + 1][j + 1]))
+
+  print()
   print("The greatest path sum through dynamic programming is ",format(grid[0][0]),".")
   return
 
@@ -105,13 +113,13 @@ def main ():
 
   ti = time.time()
   # output greatest path from exhaustive search
+  exhaustive_search (grid)
   tf = time.time()
   del_t = tf - ti
   # print time taken using exhaustive search
-
+  print("The time taken for the exhaustive search is", del_t, "seconds.")
   #The greatest path sum through exhaustive search is 23.
   #The time taken for exhaustive search is x seconds.
-
   ti = time.time()
   # output greates path from greedy approach
   greedy(grid)
@@ -127,6 +135,7 @@ def main ():
   # output greates path from divide-and-conquer approach
   ##r_max = rec_search(grid, 0, 0)
   ##r_max = max(r_max)
+  #rec_search (grid, i, j)
   tf = time.time()
   del_t = tf - ti
   # print time taken using divide-and-conquer approach
@@ -141,6 +150,7 @@ def main ():
   # print time taken using dynamic programming
   #print("The greatest path sum through dynamic programming is ", int(dynamic_prog(grid)), ".")
   print("The time taken for dynamic programming is", del_t, "seconds.")
+  print()
 
 if __name__ == "__main__":
   main()
