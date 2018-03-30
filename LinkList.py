@@ -50,10 +50,29 @@ class LinkedList (object):
   def insert_in_order (self, item):
 
   # search in an unordered list, return None if not found
+  # Check each and every one
   def find_unordered (self, item):
+    current = self.first
+    while(current != None):
+      if (current == item):
+        return current
+      current = current.next
+    if (current == None):
+      return None
 
   # Search in an ordered list, return None if not found
   def find_ordered (self, item):
+    current = self.first
+    while(current != None):
+      if (current == item):
+        return current
+      if (current < item and current.next > item):
+        return None
+      current = current.next
+    if (current == None):
+      return None
+    # if curr < item curr.next
+    # if curr > and != item
 
   # Delete and return Link from an unordered list or None if not found
   def delete_link (self, item):
@@ -75,6 +94,11 @@ class LinkedList (object):
 
   # Return True if a list is empty or False otherwise
   def is_empty (self):
+    current = self.first
+    if (current == None):
+      return True
+    else:
+      return False
 
   # Merge two sorted lists and return new list in ascending order
   def merge_list (self, other):
@@ -84,6 +108,27 @@ class LinkedList (object):
 
   # Return a new list, keeping only the first occurence of an element and removing all duplicates. Do not change the order of the elements.
   def remove_duplicates (self):
+
+  #def deleteLink (self, data):
+    #current = self.first
+    #previous = self.first
+
+    #if (current == None):
+      #return None
+
+    #while (current.data != data):
+      #if (current.next == None):
+        #return None
+      #else:
+        #previous = current
+	#current = current.next
+
+    #if (current == self.first):
+      #self.first = self.first.next
+    #else:
+      #previous.next = current.next
+
+    #return current
 
 def main():
   # Test methods insert_first() and __str__() by adding more than 10 items to a list and printing it.
