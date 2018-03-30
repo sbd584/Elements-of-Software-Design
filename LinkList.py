@@ -54,23 +54,22 @@ class LinkedList (object):
     current.next = new_link
 
   # add an item in an ordered list in ascending order
-  # This one is not finished *********
   def insert_in_order (self, item):
-    newLink = Link(item)
+    new_link = Link(item)
     current = self.first
     if(current == None):
       self.first = new_link
       return
     while(current != None):
       if(current.next == None):
-
-        continue
+        current.next = new_link
+        return
       if(current <= item and current.next > item):
-
+        right_side = current.next
+        current.next = new_link
+        new_link.next = right_side
+        return
       current = curent.next
-    if(current == None):
-      self.first = newLink
-
 
   # search in an unordered list, return None if not found
   # Check each and every one
