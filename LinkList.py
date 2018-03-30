@@ -135,7 +135,21 @@ class LinkedList (object):
 
   # Test if two lists are equal, item by item and return True
   def is_equal (self, other):
-
+    current1 = self.first
+    current2 = other.first
+    if(current1 != None and current2 != None):
+      while(current1 != None):
+        if(current2 == None):
+          return False
+        if(current1 != current2):
+          return False
+        current1 = current1.next
+        current2 = current2.next
+    elif((current1 == None and current2 == None):
+      return True
+    #Checks if current2 is longer than current1
+    else:
+      return False
   # Return a new list, keeping only the first occurence of an element and removing all duplicates. Do not change the order of the elements.
   def remove_duplicates (self):
 
