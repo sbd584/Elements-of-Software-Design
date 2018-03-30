@@ -167,29 +167,9 @@ class LinkedList (object):
     #Checks if current2 is longer than current1
     else:
       return False
+
   # Return a new list, keeping only the first occurence of an element and removing all duplicates. Do not change the order of the elements.
   def remove_duplicates (self):
-
-  #def deleteLink (self, data):
-    #current = self.first
-    #previous = self.first
-
-    #if (current == None):
-      #return None
-
-    #while (current.data != data):
-      #if (current.next == None):
-        #return None
-      #else:
-        #previous = current
-	#current = current.next
-
-    #if (current == self.first):
-      #self.first = self.first.next
-    #else:
-      #previous.next = current.next
-
-    #return current
 
 def main():
   # Test methods insert_first() and __str__() by adding more than 10 items to a list and printing it.
