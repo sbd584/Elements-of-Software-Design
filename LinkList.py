@@ -19,35 +19,58 @@
 #  Date Last Modified:
 
 class Link (object):
-  def __init__(self,data,next=None):
+  def __init__ (self,data,next = None):
     self.data = data
     self.next = next
 
 class LinkedList (object):
-
-  def __init__(self):
+  def __init__ (self):
     self.first = None
-  # get number of links
+
   def get_num_links (self):
+    current = self.first
+    count = 0
+    while(current != None):
+      current = curent.next
+      count += 1
+    if(current == None):
+      return count
 
   # add an item at the beginning of the list
   def insert_first (self, item):
-    newLink = Link(data)
-    newLink.next = self.first
-    self.first = newLink
+    new_link = Link (item)
+    new_link.next = self.first
+    self.first = new_link
 
-  # add an item at the end of a list
+  # add an item at the end o  f a list
   def insert_last (self, item):
-    newLink = Link(data)
+    new_link = Link (item)
     current = self.first
-    if(current == None):
-      self.first
-    while(current.next != None):
-      current = curent.next
-    current.next = newLink
+    if (current == None):
+      self.first = new_link
+      return
+    while (current.next != None):
+      current = current.next
+    current.next = new_link
 
   # add an item in an ordered list in ascending order
+  # This one is not finished *********
   def insert_in_order (self, item):
+    newLink = Link(item)
+    current = self.first
+    if(current == None):
+      self.first = new_link
+      return
+    while(current != None):
+      if(current.next == None):
+
+        continue
+      if(current <= item and current.next > item):
+
+      current = curent.next
+    if(current == None):
+      self.first = newLink
+
 
   # search in an unordered list, return None if not found
   # Check each and every one
@@ -71,8 +94,6 @@ class LinkedList (object):
       current = current.next
     if (current == None):
       return None
-    # if curr < item curr.next
-    # if curr > and != item
 
   # Delete and return Link from an unordered list or None if not found
   def delete_link (self, item):
@@ -91,6 +112,16 @@ class LinkedList (object):
 
   # Return True if a list is sorted in ascending order or False otherwise
   def is_sorted (self):
+    current = self.first
+    while(current != None):
+      if(current.next == None):
+        current = current.next
+        continue
+      if(current.next < current):
+        return False
+      current = current.next
+    if(current == None):
+      return True
 
   # Return True if a list is empty or False otherwise
   def is_empty (self):
