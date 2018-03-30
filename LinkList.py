@@ -96,6 +96,23 @@ class LinkedList (object):
 
   # Delete and return Link from an unordered list or None if not found
   def delete_link (self, item):
+    previous = self.first
+    current = self.first
+
+    if (current == None):
+      return None
+
+    while (current.data != item):
+      if (current.next == None):
+        return None
+      else:
+        previous = current
+	current = current.next
+
+    if (current == self.first):
+      self.first = self.first.next
+    else:
+      previous.next = current.next
 
   # String representation of data 10 items to a line, 2 spaces between data
   def __str__ (self):
