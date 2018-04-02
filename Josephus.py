@@ -1,22 +1,3 @@
-#  File: Josephus.py
-
-#  Description:
-
-#  Student Name:
-
-#  Student UT EID:
-
-#  Partner Name:
-
-#  Partner UT EID:
-
-#  Course Name: CS 313E
-
-#  Unique Number:
-
-#  Date Created:
-
-#  Date Last Modified: 
 
 class Link (object):
   def __init__ (self, data, next):
@@ -30,24 +11,26 @@ class CircularList (object):
     self.first.next = self.first
 
   # Insert an element (value) in the list
+  # Not too confident in this one yet
   def insert ( self, item ):
-    self.first.next = Link(data, self.head.next)
+    first_one = self.first
+    previous = self.first
+    current = self.first
+
+    if (current == None):
+      self.first = new_link
+      return
+
+    while (current.next != first_one):
+      previous = current
+      current = current.next
+
+    previous.next = new_link
+    new_link.next = current.next
 
   # Find the link with the given key (value)
   def find ( self, key ):
-    current = self.first
-
-    while (current != None):
-      if  (current.data == item):
-        return int(current)
-
-      current = current.next
-
-    if  (current == None):
-      return None
-
-  # Delete a link with a given key (value)
-  def delete ( self, key ):
+    first_one = self.first
     previous = self.first
     current = self.first
 
@@ -55,7 +38,30 @@ class CircularList (object):
       return None
 
     while (current.data != key):
-      if (current.next == None):
+      if (current.next == first_one):
+        return None
+
+      else:
+        previous = current
+        current = current.next
+
+    if (current.data == key):
+      return int(current)
+
+    else:
+      return None
+
+  # Delete a link with a given key (value)
+  def delete ( self, key ):
+    first_one = self.first
+    previous = self.first
+    current = self.first
+
+    if (current == None):
+      return None
+
+    while (current.data != key):
+      if (current.next == first_one):
         return None
 
       else:
@@ -73,6 +79,7 @@ class CircularList (object):
   def delete_after ( self, start, n ):
 
   # Return a string representation of a Circular List
+  # Wrong
   def __str__ ( self ):
 
     string = ""
