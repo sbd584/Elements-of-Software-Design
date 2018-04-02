@@ -1,3 +1,25 @@
+#  File: Josephus.py
+
+#  Description: Assignment 11 – Playing with LinkedLists
+
+#  Student Name: Luis Carlos Orozco
+
+#  Student UT EID: lco372
+
+#  Partner Name: Samuel Beck Dillon
+
+#  Partner UT EID: sbd584
+
+#  Course Name: CS 313E
+
+#  Unique Number:  51335 - sbd584
+
+#  Unique Number: 51340 - lco372
+
+#  Date Created: 4/01/2018
+
+#  Date Last Modified: 4/02/2018
+
 class Link (object):
   def __init__ (self, data, next = None):
     self.data = data
@@ -14,7 +36,7 @@ class CircularList (object):
   # Not too confident in this one yet
   def insert ( self, item ):
     first_one = self.first
-    previous = self.first
+    pre = self.first
     current = self.first
     new_link = Link (item)
 
@@ -23,16 +45,16 @@ class CircularList (object):
       return
 
     while (current.next != first_one):
-      previous = current
+      pre = current
       current = current.next
 
-    previous.next = new_link
+    pre.next = new_link
     new_link.next = current.next
 
   # Find the link with the given key (value)
   def find ( self, key ):
     first_one = self.first
-    previous = self.first
+    pre = self.first
     current = self.first
 
     if (current == None):
@@ -43,7 +65,7 @@ class CircularList (object):
         return None
 
       else:
-        previous = current
+        pre = current
         current = current.next
 
     if (current.data == key):
@@ -55,7 +77,7 @@ class CircularList (object):
   # Delete a link with a given key (value)
   def delete ( self, key ):
     first_one = self.first
-    previous = self.first
+    pre = self.first
     current = self.first
 
     if (current == None):
@@ -66,20 +88,20 @@ class CircularList (object):
         return None
 
       else:
-        previous = current
+        pre = current
         current = current.next
 
     if (current == self.first):
       self.first = self.first.next
 
     else:
-      previous.next = current.next
+      pre.next = current.next
 
   # Delete the nth link starting from the Link start
   # Return the next link from the deleted Link
   def delete_after ( self, start, n ):
     first_one = self.first
-    previous = self.first
+    pre = self.first
     current = self.first
     count = 0
     location = start
@@ -87,38 +109,24 @@ class CircularList (object):
   # Return a string representation of a Circular List
   # Wrong
   def __str__ ( self ):
-    first_one = self.first
+
+    first_one = self.first.next.next
+    pre = self.first
     current = self.first
     string = ""
 
-    for i in range(self.get_num_links()):
-      if (current != first_one):
+    if (current == None):
+      print("")
+
+    else:
+      string += str(current.data) + "  "
+      current.next
+      while (current != first_one):
         string += str(current.data) + "  "
-
-        if (i > 8 and i % 9 == 0):
-          print()
-
-      if (current == first_one):
-        print("")
-
-      current = current.next
+        pre = current
+        current = current.next
 
     return string
-
-  def get_num_links (self):
-    first_one = self.first
-    current = self.first
-    count = 1
-
-    if (current == None):
-      return 0
-
-    while (current.next != first_one):
-      current = current.next
-      count += 1
-
-    if (current.next == first_one):
-      return count
 
 def read_file (in_file):
 
@@ -149,15 +157,18 @@ def main():
   #linked3 = CircularList()
 
   #Test insert
-  linked1.insert(0)
-  print("insert 0")
-  print(linked1)
   linked1.insert(1)
   print("insert 1")
+  print(linked1)
+  linked1.insert(3)
+  print("insert 3")
   print(linked1)
   linked1.insert(2)
   print("insert 2 ")
   print(linked1)
+  # Doesn't Work
+
+
 
 
 
