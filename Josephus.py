@@ -1,6 +1,5 @@
-
 class Link (object):
-  def __init__ (self, data, next):
+  def __init__ (self, data, next = None):
     self.data = data
     self.next = next
 
@@ -8,6 +7,7 @@ class CircularList (object):
   # Constructor
   def __init__ ( self ):
     self.first = Link(None, None)
+    #self.next = next
     self.first.next = self.first
 
   # Insert an element (value) in the list
@@ -16,6 +16,7 @@ class CircularList (object):
     first_one = self.first
     previous = self.first
     current = self.first
+    new_link = Link (item)
 
     if (current == None):
       self.first = new_link
@@ -77,29 +78,47 @@ class CircularList (object):
   # Delete the nth link starting from the Link start
   # Return the next link from the deleted Link
   def delete_after ( self, start, n ):
+    first_one = self.first
+    previous = self.first
+    current = self.first
+    count = 0
+    location = start
 
   # Return a string representation of a Circular List
   # Wrong
   def __str__ ( self ):
-
+    first_one = self.first
+    current = self.first
     string = ""
 
-    current = self.first
-
     for i in range(self.get_num_links()):
-      if (current != None):
+      if (current != first_one):
         string += str(current.data) + "  "
 
         if (i > 8 and i % 9 == 0):
           print()
 
-      if (current == None):
+      if (current == first_one):
         print("")
 
       current = current.next
 
     return string
 
+  def get_num_links (self):
+    first_one = self.first
+    current = self.first
+    count = 1
+
+    if (current == None):
+      return 0
+
+    while (current.next != first_one):
+      current = current.next
+      count += 1
+
+    if (current.next == first_one):
+      return count
 
 def read_file (in_file):
 
@@ -115,6 +134,31 @@ def read_file (in_file):
   line = line.strip()
   key = int(line)
 
+  return soldiers,start,key
+
 def main():
+
+  # Test read_file
+  # Working
+  in_file = open("josephus.txt", "r")
+  reading = read_file(in_file)
+  print(reading)
+
+  linked1 = CircularList()
+  #linked2 = CircularList()
+  #linked3 = CircularList()
+
+  #Test insert
+  linked1.insert(0)
+  print("insert 0")
+  print(linked1)
+  linked1.insert(1)
+  print("insert 1")
+  print(linked1)
+  linked1.insert(2)
+  print("insert 2 ")
+  print(linked1)
+
+
 
 main()
