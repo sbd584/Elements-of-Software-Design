@@ -2,15 +2,19 @@
 
 #  Description: Assignment 11 – Playing with LinkedLists
 
-#  Student Name:
+#  Student Name: Luis Carlos Orozco
 
-#  Student UT EID:
+#  Student UT EID: lco372
 
-#  Partner Name:
+#  Partner Name: Samuel Beck Dillon
 
-#  Partner UT EID:
+#  Partner UT EID: sbd584
 
 #  Course Name: CS 313E
+
+#  Unique Number:  51335 - sbd584
+
+#  Unique Number: 51340 - lco372
 
 #  Date Created: 4/01/2018
 
@@ -87,27 +91,42 @@ class CircularList (object):
       current = current.next
 
     while (pre.next != first_one):
-      if (current.next == first_one):
-        return None
-
-      pre = current
-      current = current.next
+      pre = previous.next
 
     if (current == first_one):
       if (first_one == first_one.next):
-      self.first = self.first.next
+        first_one = None
 
-    else:
-      pre.next = current.next
+      else:
+        first_one = current.next
+
+    pre.next = current.next
+    
+    return current
 
   # Delete the nth link starting from the Link start
   # Return the next link from the deleted Link
   def delete_after ( self, start, n ):
     first_one = self.first
-    pre = self.first
     current = self.first
     count = 0
     location = start
+
+    if (first_one == None):
+      return None
+
+    while (current.data != location):
+      current = current.next
+
+    count = 1
+
+    while not (count == n):
+      current = current.next
+      count += 1
+
+    #self.delete(current.data)
+
+    return current.next
 
   # Return a string representation of a Circular List
   # Wrong
@@ -118,7 +137,7 @@ class CircularList (object):
     current = self.first
     string = ""
 
-    if (current == None):
+    if (first_one == None):
       print("")
 
     else:
@@ -158,6 +177,14 @@ def main():
   linked1 = CircularList()
   #linked2 = CircularList()
   #linked3 = CircularList()
+
+  for i in range (1, n + 1):
+    soldiers.insert(i)
+
+  
+
+  while (soldiers.first.next != soldiers.first):
+    
 
   #Test insert
   linked1.insert(1)
