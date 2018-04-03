@@ -1,24 +1,4 @@
-#  File: Josephus.py
 
-#  Description: Assignment 11 – Playing with LinkedLists
-
-#  Student Name: Luis Carlos Orozco
-
-#  Student UT EID: lco372
-
-#  Partner Name: Samuel Beck Dillon
-
-#  Partner UT EID: sbd584
-
-#  Course Name: CS 313E
-
-#  Unique Number:  51335 - sbd584
-
-#  Unique Number: 51340 - lco372
-
-#  Date Created: 4/01/2018
-
-#  Date Last Modified: 4/02/2018
 
 class Link (object):
   def __init__ (self, data, next = None):
