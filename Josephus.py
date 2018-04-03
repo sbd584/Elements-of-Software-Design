@@ -1,19 +1,16 @@
 
-
 class Link (object):
   def __init__ (self, data, next = None):
     self.data = data
     self.next = next
+    #self.previous = previous
 
 class CircularList (object):
   # Constructor
   def __init__ ( self ):
-    self.first = Link(None, None)
-    #self.next = next
-    self.first.next = self.first
+    self.first = None
 
   # Insert an element (value) in the list
-  # Not too confident in this one yet
   def insert ( self, item ):
     first_one = self.first
     current = self.first
@@ -21,38 +18,32 @@ class CircularList (object):
 
     if (first_one == None):
       first_one = new_link
-      new_link = current
+      new_link.next = self.first
       current = new_link
-      return
-
+    
     while (current.next != first_one):
       current = current.next
 
     current.next = new_link
     new_link.next = first_one
+    new_link.previous = current
 
   # Find the link with the given key (value)
   def find ( self, key ):
-    first_one = self.first
-    pre = self.first
+    first_key = self.first
     current = self.first
 
     if (current == None):
       return None
 
+    if (first_key.data == key):
+      return first_key
+
     while (current.data != key):
-      if (current.next == first_one):
-        return None
+     if (current.data == key):
+       return current
 
-      else:
-        pre = current
-        current = current.next
-
-    if (current.data == key):
-      return int(current)
-
-    else:
-      return None
+    return None
 
   # Delete a link with a given key (value)
   def delete ( self, key ):
@@ -71,7 +62,7 @@ class CircularList (object):
       current = current.next
 
     while (pre.next != first_one):
-      pre = previous.next
+      pre = pre.next
 
     if (current == first_one):
       if (first_one == first_one.next):
@@ -89,6 +80,7 @@ class CircularList (object):
   def delete_after ( self, start, n ):
     first_one = self.first
     current = self.first
+    
     count = 0
     location = start
 
@@ -104,16 +96,40 @@ class CircularList (object):
       current = current.next
       count += 1
 
-    #self.delete(current.data)
+    self.delete(current.data)
 
     return current.next
 
+  def delete_helper( self, start, n):
+    first_one = self.first
+    current = self.find(start)
+    pre = self.first
+
+    count = 1
+
+    while (pre.next != first_one):
+      pre = pre.next
+
+    while (current.data != start):
+      if (current.next == first_one):
+        return None
+
+      pre = current
+      current = current.next
+           
+    while (count < (n)):
+      current = current.next
+      count += 1
+
+    #if (current == first_one):
+      #first_one = current.next
+
+    return current.data
+    
   # Return a string representation of a Circular List
-  # Wrong
   def __str__ ( self ):
 
     first_one = self.first.next.next
-    pre = self.first
     current = self.first
     string = ""
 
@@ -125,7 +141,6 @@ class CircularList (object):
       current.next
       while (current != first_one):
         string += str(current.data) + "  "
-        pre = current
         current = current.next
 
     return string
@@ -144,42 +159,38 @@ def read_file (in_file):
   line = line.strip()
   key = int(line)
 
-  return soldiers,start,key
+  return soldiers, start, key
 
 def main():
 
   # Test read_file
   # Working
   in_file = open("josephus.txt", "r")
-  reading = read_file(in_file)
-  print(reading)
-
-  linked1 = CircularList()
-  #linked2 = CircularList()
-  #linked3 = CircularList()
-
-  for i in range (1, n + 1):
-    soldiers.insert(i)
-
+  n, location, elim = read_file(in_file)
   
+  # Create soldiers linked list
+  soldiers = CircularList()
+
+  # Establish the number of soldiers
+  for key in range (1, n + 1):
+    soldiers.insert(key)
+
+  print(soldiers)
+
+  new_location = location
 
   while (soldiers.first.next != soldiers.first):
-    
+    first_soldier = soldiers.delete_after(location, elim)
+    last_soldier = soldiers.delete_helper(location, elim)
+    last_location = last_soldier.data
+    new_location = new_location.data
+    print(last_location)
 
-  #Test insert
-  linked1.insert(1)
-  print("insert 1")
-  print(linked1)
-  linked1.insert(3)
-  print("insert 3")
-  print(linked1)
-  linked1.insert(2)
-  print("insert 2 ")
-  print(linked1)
-  # Doesn't Work
+  print()
+  print(soldiers)
 
+  #while (soldiers.first.next != soldiers.f  irst):
 
-
-
-
+  in_file.close()
+  
 main()
