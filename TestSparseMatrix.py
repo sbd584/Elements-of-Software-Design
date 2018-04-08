@@ -30,7 +30,7 @@ class Link (object):
   # return a String representation of a Link (col, data)
   def __str__ (self):
     s = ''
-    s += str(self.row) + " " + str(self.col) + " " + str(self.data) + "\n"
+    s += "(" + str(self.col) + ", " + str(self.data) + ")" + "\n"
     
     return s
 
@@ -51,6 +51,50 @@ class LinkedList (object):
 
     current.next = new_link
 
+  # inserts a Link
+  def insert_link (self, col, data):
+    new_link = Link(col, data)
+    current = self.first
+    
+    if (col == None):
+      self.first = new_link
+      return
+
+    while (current.next != None):
+      if (current.next == None):
+        current.next = new_link
+        return
+
+      if (current.col <= col and current.next.col > col):
+        right_side = current.next
+        current.next = new_link
+        new_link.next = right_side
+        return
+
+      else:
+        current = current.next
+
+  def delete_link (self, col, data):
+    previous = self.first
+    current = self.first
+
+    if (current == None):
+      return None
+
+    while (current.data != data):
+      if (current.next == None):
+        return None
+
+      else:
+        previous = current
+        current = current.next
+
+    if (current == self.first):
+      self.first = self.first.next
+
+    else:
+      previous.next = current.next
+        
   # return a String representation of a LinkedList
   def __str__ (self):
     current = self.first
@@ -60,16 +104,16 @@ class LinkedList (object):
     current = current.next
     
     while (current != None):
-      s += " " + str(current.data)
+      s += ", " + str(current.data)
       current = current.next
       
     return s
 
 class Matrix (object):
   def __init__ (self, row = 0, col = 0):
+    self.matrix = []
     self.row = row
     self.col = col
-    self.matrix = []
 
   # perform assignment operation: matrix[row][col] = data
   def set_element (self, row, col, data):
@@ -107,31 +151,40 @@ class Matrix (object):
     if ((self.row != other.row) or (self.col != other.col)):
       return
 
-    matrix_add = Matrix(self.row, self.col)
+    mat = Matrix(self.row, self.col)
 
     for i in range(self.row):
-      row = LinkedList()
       for j in range(self.col):
-        row.insert_last(j, self.get_row(i)[j] + other.get_row(i)[j])
+        mat.matrix.insert_last(j, self.get_row(i)[j] + other.get_row(i)[j])
 
-      matrix_add.matrix.append(row)
+      #mat.matrix.append(row)
 
-    return matrix_add
+    return mat
 
   # multiply two sparse matrices
   def __mul__ (self, other):
-    return
+    if (self.col != other.row):
+      return
+
+    mat = Matrix(self.row, other.col)
+    for i in range(self.row):
+      for j in range(other.col):
+        s = 0
+        for k in range(self.col):
+          s += self.get_row(i)[k] * other.get_col(j)[k]
+        mat.matrix.insert_last(j, s)
+        
+    return mat
 
   # return a list representing a row with the zero elements inserted
   def get_row (self, n):
     row = self.col * [0]
-    current = self.matrix[n].first
+    current = self.matrix[n]
 
-    for i in range (self.row):
-      if (i == n):
-        for j in range (self.col):
+    while (current != None):
+      if (current.row == n):
           row[current.col] = current.data
-          current = current.next
+      current = current.next
 
     return row
     
@@ -139,39 +192,34 @@ class Matrix (object):
   # return a list representing a column with the zero elements inserted
   def get_col (self, n):
     col = self.row * [0]
-
-    for i in range (self.row):
-      current = self.matrix[i].first
+    current = self.matrix[n]
       
-      while (current != None) :
-        if (i == n ):
-          col[i] = current.data
-          break
-    
-        elif not (i > n):
-          current = current.next
+    while (current != None) :
+      if (current.col == n ):
+        col[current.row] = current.data
 
-        else:
-          break
+      current = current.next
+    
+        #elif not (i > n):
+          #current = current.next
+
+        #else:
+          #break
     
     return col
 
   # return a String representation of a matrix
   def __str__ (self):
     s = ''
-    current = self.matrix[0]
 
     for i in range(self.row):
+      row = self.get_row(i)
+      s += str(row[0]).rjust(2)
       for j in range(self.col):
-        if ((current != None) and (current.data == j)):
-          s += str(current.data).rjust(4) + " "
-          current = current.next
+        s += str(row[j]).rjust(3) + " "
 
-        else:
-          s += "0".rjust(4) + " "
-
-        s = s[0:-1]
-        s += "\n"
+      s = s[0:-1]
+      s += "\n"
         
     return s
 
