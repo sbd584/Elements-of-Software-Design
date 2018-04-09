@@ -128,15 +128,19 @@ class Matrix (object):
     if (self.col != other.row):
       return
 
-    mat = Matrix(self.row, other.col)
-    for i in range(self.row):
-      for j in range(other.col):
-        s = 0
-        for k in range(self.col):
-          s += self.get_row(i)[k] * other.get_col(j)[k]
-        mat.matrix.insert_last(j, s)
-        
-    return mat
+    matrix_mult = Matrix (self.row, other.col)
+
+    for i in range (self.row):
+      row = LinkedList()
+      r = self.get_row(i)
+      for j in range (other.col):
+        sum_mult = 0
+        c = other.get_col(j)
+        for k in range (other.row):
+          sum_mult += r[k] * c[k]
+        row.insert_last(j, sum_mult)
+      matrix_mult.matrix.append (row)
+    return matrix_mult
 
   # return a list representing a row with the zero elements inserted
   def get_row (self, n):
