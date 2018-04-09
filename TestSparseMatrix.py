@@ -24,11 +24,6 @@
 # Working:
 #   Link
 #   LinkedList: __init__ , insert_first ,insert_last, delete_link, __str__
-#   Matrix: __init__, __add__ , __mul__ , read_matrix
-
-# Broken:
-#   set_element, get_row, __str__
-#   get_col: close
 
 class Link (object):
   def __init__ (self, col = 0, data = 0, next = None):
@@ -39,16 +34,16 @@ class Link (object):
   # return a String representation of a Link (col, data)
   def __str__ (self):
     s = ''
-    s += str(self.row) + " " + str(self.col) + " " + str(self.data) + "\n"
-
+    s += "(" + str(self.col) + ", " + str(self.data) + ")" + "\n"
+    
     return s
 
 class LinkedList (object):
   def __init__ (self):
     self.first = None
 
-  def insert_last (self, col, data):
-    new_link = Link (col, data)
+  def insert_last (self, col, item):
+    new_link = Link (col, item)
     current = self.first
 
     if (current == None):
@@ -61,32 +56,28 @@ class LinkedList (object):
     current.next = new_link
 
   # Inserting First
-  def insert_link (self, item):
-    new_link = Link (item)
+  def insert_link (self, col, start, item):
+    new_link = Link (col, item)
+    current = self.first
 
+    while (current.next != start):
+      current = current.next
+    
     new_link.next = self.first
     self.first = new_link
 
-  def delete_link(self, item):
+  def delete_link(self, link):
     previous = self.first
     current = self.first
 
     if (current == None):
-      return None
+      return
 
-    while (current.data != item):
-      if (current.next == None):
-        return None
+    while (current != link):
+      previous = current
+      current = current.next
 
-      else:
-        previous = current
-        current = current.next
-
-    if (current == self.first):
-      self.first = self.first.next
-
-    else:
-      previous.next = current.next
+    previous.next = current.next
 
   # return a String representation of a LinkedList
   def __str__ (self):
@@ -110,34 +101,10 @@ class Matrix (object):
 
   # perform assignment operation: matrix[row][col] = data
   def set_element (self, row, col, data):
-    previous = self.matrix[row].first
-    current = self.matrix[row].first
-
-    while (current != None):
-      if ((current.row == row) and (current.col == col)):
-        if (data == 0):
-          if (current.next == None):
-            previous.next == None
-          if (previous == current):
-            self.matrix[row].first = current.next
-
-          previous.next = current.next
-          return
-
-        current.data = data
-        return
-
-      if (current.col > col):
-        if (data == 0):
-          return
-
-        new_link = Link (col, data)
-        previous.next = new_link
-        new_link.next = current
-        return
-
-    previous = current
-    current = current.next
+    if (data == 0):
+      self.delete_link (data)
+    else:
+      self.insert_link (data)
 
   # add two sparse matrices
   def __add__ (self, other):
@@ -172,50 +139,56 @@ class Matrix (object):
           sum_mult += r[k] * c[k]
         row.insert_last(j, sum_mult)
       matrix_mult.matrix.append (row)
+
     return matrix_mult
 
   # return a list representing a row with the zero elements inserted
   def get_row (self, n):
-    row = self.col * [0]
+    row = []
     current = self.matrix[n].first
 
-    for i in range (self.row):
-      if (i == n):
-        for j in range (self.col):
-          row[current.col] = current.data
-          current = current.next
+    for i in range (self.col):
+      if (current == n):
+        row[current.col] = current.data
+        current = current.next
+
+      else:
+        row[current.col] = 0
 
     return row
 
 
   # return a list representing a column with the zero elements inserted
   def get_col (self, n):
-    col = self.row * [0]
+    col = []
 
-    for i in range (self.row):
-      current = self.matrix[i].first
+    for row in self.matrix:
+      current = row.first
 
-      while (current != None) :
-        if (i == n ):
-          col[i] = current.data
+      while (current != None):
+        if (current.col == n ):
+          col[row] = current.data
           break
 
-        elif not (i > n):
+        elif not (row > n):
           current = current.next
 
         else:
           break
+
+      if (current == None):
+        col[row] = 0
 
     return col
 
   # return a String representation of a matrix
   def __str__ (self):
     s = ''
-    current = self.matrix[0]
 
-    for i in range(self.row):
+    for row in self.matrix:
+      current = row.first
       for j in range(self.col):
-        if ((current != None) and (current.data == j)):
+        if ((current != None) and (current.col == j)):
           s += str(current.data).rjust(4) + " "
           current = current.next
 
