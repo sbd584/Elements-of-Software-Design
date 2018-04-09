@@ -24,6 +24,11 @@
 # Working:
 #   Link
 #   LinkedList: __init__ , insert_first ,insert_last, delete_link, __str__
+#   Matrix: __init__, __add__ , __mul__ , read_matrix
+
+# Broken:
+#   set_element, get_row, __str__
+#   get_col: close
 
 class Link (object):
   def __init__ (self, col = 0, data = 0, next = None):
@@ -152,7 +157,22 @@ class Matrix (object):
 
   # multiply two sparse matrices
   def __mul__ (self, other):
-    return
+    if (self.col != other.row):
+      return
+
+    matrix_mult = Matrix (self.row, other.col)
+
+    for i in range (self.row):
+      row = LinkedList()
+      r = self.get_row(i)
+      for j in range (other.col):
+        sum_mult = 0
+        c = other.get_col(i)
+        for k in range (other.row):
+          sum_mult += r[k] * c[k]
+        row.insert_last(j, sum_mult)
+      matrix_mult.matrix.append (row)
+    return matrix_mult
 
   # return a list representing a row with the zero elements inserted
   def get_row (self, n):
