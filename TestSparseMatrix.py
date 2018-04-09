@@ -101,11 +101,34 @@ class Matrix (object):
 
   # perform assignment operation: matrix[row][col] = data
   def set_element (self, row, col, data):
-    new_link
-    if (data == 0):
-      self.delete_link (data)
-    else:
-      self.insert_link (data)
+    previous = self.matrix[row].first
+    current = self.matrix[row].first
+
+    while (current != None):
+      if (current.col == col):
+        if (data == 0):
+          if (current.next == None):
+            previous.next == None
+
+          if (current == self.matrix[row].first):
+            self.matrix[row].first = current.next
+
+          previous.next = current.next
+          return
+        
+        current.data = data
+        return
+      elif ((current.col == col) or (current.col > col)):
+        if (data == 0):
+          return
+
+        new_link = Link(col, data)
+        previous.next = new_link
+        new_link.next = current
+        return
+
+      previous = current
+      current = current.next
 
   # add two sparse matrices
   def __add__ (self, other):
