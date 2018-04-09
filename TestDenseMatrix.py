@@ -44,7 +44,7 @@ class Matrix (object):
       return None
 
     mat = Matrix (self.row, other.col)
-    
+
     for i in range (self.row):
       new_row = []
       for j in range (other.col):
@@ -78,7 +78,7 @@ def read_matrix (in_file):
   line = in_file.readline()
 
   return mat
-    
+
 def main():
   in_file = open ("./matrix.txt", "r")
 
