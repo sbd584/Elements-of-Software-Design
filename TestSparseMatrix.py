@@ -5,9 +5,9 @@
 #              element in that list is a linked list having the column
 #              number and non-zero data in each link
 
-#  Student Name:
+#  Student Name: Luis Carlos Orozco
 
-#  Student UT EID:
+#  Student UT EID: 
 
 #  Partner Name:
 
@@ -24,10 +24,6 @@
 # Working:
 #   Link
 #   LinkedList: __init__ , insert_first ,insert_last, delete_link, __str__
-#   Matrix: __init__, set_element ,__add__ , __mul__, get_col ,read_matrix
-
-# Broken:
-#   get_row, __str__
 
 class Link (object):
   def __init__ (self, col = 0, data = 0, next = None):
@@ -38,16 +34,16 @@ class Link (object):
   # return a String representation of a Link (col, data)
   def __str__ (self):
     s = ''
-    s += str(self.row) + " " + str(self.col) + " " + str(self.data) + "\n"
-
+    s += "(" + str(self.col) + ", " + str(self.data) + ")" + "\n"
+    
     return s
 
 class LinkedList (object):
   def __init__ (self):
     self.first = None
 
-  def insert_last (self, col, data):
-    new_link = Link (col, data)
+  def insert_last (self, col, item):
+    new_link = Link (col, item)
     current = self.first
 
     if (current == None):
@@ -60,32 +56,28 @@ class LinkedList (object):
     current.next = new_link
 
   # Inserting First
-  def insert_link (self, item):
-    new_link = Link (item)
+  def insert_link (self, col, start, item):
+    new_link = Link (col, item)
+    current = self.first
 
+    while (current.next != start):
+      current = current.next
+    
     new_link.next = self.first
     self.first = new_link
 
-  def delete_link(self, item):
+  def delete_link(self, link):
     previous = self.first
     current = self.first
 
     if (current == None):
-      return None
+      return
 
-    while (current.data != item):
-      if (current.next == None):
-        return None
+    while (current != link):
+      previous = current
+      current = current.next
 
-      else:
-        previous = current
-        current = current.next
-
-    if (current == self.first):
-      self.first = self.first.next
-
-    else:
-      previous.next = current.next
+    previous.next = current.next
 
   # return a String representation of a LinkedList
   def __str__ (self):
@@ -123,7 +115,7 @@ class Matrix (object):
 
           previous.next = current.next
           return
-
+        
         current.data = data
         return
       elif ((current.col == col) or (current.col > col)):
@@ -188,6 +180,7 @@ class Matrix (object):
 
     return row
 
+
   # return a list representing a column with the zero elements inserted
   def get_col (self, n):
     col = []
@@ -210,11 +203,13 @@ class Matrix (object):
   # return a String representation of a matrix
   def __str__ (self):
     s = ''
-    current = self.matrix[0]
 
-    for i in range(self.row):
+    print("hello")
+
+    for row in self.matrix:
+      current = row.first
       for j in range(self.col):
-        if ((current != None) and (current.data == j)):
+        if ((current != None) and (current.col == j)):
           s += str(current.data).rjust(4) + " "
           current = current.next
 
@@ -222,7 +217,7 @@ class Matrix (object):
           s += "0".rjust(4) + " "
 
         s = s[0:-1]
-        s += "\n"
+      s += "\n"
 
     return s
 
