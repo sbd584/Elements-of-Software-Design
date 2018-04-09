@@ -101,6 +101,7 @@ class Matrix (object):
 
   # perform assignment operation: matrix[row][col] = data
   def set_element (self, row, col, data):
+    new_link
     if (data == 0):
       self.delete_link (data)
     else:
@@ -127,20 +128,15 @@ class Matrix (object):
     if (self.col != other.row):
       return
 
-    matrix_mult = Matrix (self.row, other.col)
-
-    for i in range (self.row):
-      row = LinkedList()
-      r = self.get_row(i)
-      for j in range (other.col):
-        sum_mult = 0
-        c = other.get_col(i)
-        for k in range (other.row):
-          sum_mult += r[k] * c[k]
-        row.insert_last(j, sum_mult)
-      matrix_mult.matrix.append (row)
-
-    return matrix_mult
+    mat = Matrix(self.row, other.col)
+    for i in range(self.row):
+      for j in range(other.col):
+        s = 0
+        for k in range(self.col):
+          s += self.get_row(i)[k] * other.get_col(j)[k]
+        mat.matrix.insert_last(j, s)
+        
+    return mat
 
   # return a list representing a row with the zero elements inserted
   def get_row (self, n):
@@ -149,11 +145,11 @@ class Matrix (object):
 
     for i in range (self.col):
       if (current == n):
-        row[current.col] = current.data
+        row.append(current.data)
         current = current.next
 
       else:
-        row[current.col] = 0
+        row.append(0)
 
     return row
 
@@ -167,17 +163,13 @@ class Matrix (object):
 
       while (current != None):
         if (current.col == n ):
-          col[row] = current.data
+          col.append(current.data)
           break
 
-        elif not (row > n):
-          current = current.next
-
-        else:
-          break
+        current = current.next
 
       if (current == None):
-        col[row] = 0
+        col.append(0)
 
     return col
 
