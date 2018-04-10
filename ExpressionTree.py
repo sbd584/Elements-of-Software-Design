@@ -18,9 +18,10 @@
 
 #  Date Last Modified:
 
-class Stack (object):
+#class Stack (object):
 
 class Node (object):
+
   def __init__ (self, data):
     self.data = data
     self.lchild = None
@@ -52,10 +53,10 @@ class Tree (object):
       parent = self.root
       while (current != None):
         parent = current
-	if (val < current.data):
-	  current = current.lchild
-	else:
-	  current = current.rchild
+        if (val < current.data):
+          current = current.lchild
+        else:
+          current = current.rchild
       if (val < parent.data):
         parent.lchild = new_node
       else:
@@ -68,9 +69,9 @@ class Tree (object):
       print (aNode.data)
       self.in_order (aNode.rchild)
 
-  def createTree (self, expr):
+  #def createTree (self, expr):
 
-  def evaluate (self, aNode):
+  #def evaluate (self, aNode):
 
   def preOrder (self, aNode):
     if (aNode != None):
@@ -78,9 +79,16 @@ class Tree (object):
       self.pre_order (aNode.lchild)
       self.pre_order (aNode.rchild)
 
-  def postOrder (self, aNode):
+  #def postOrder (self, aNode):
     #if (aNode != None):
 
 def main():
+
+  txt_file = open ('expression.txt', 'r')
+  txt_reading = txt_file.read()
+  print("\n",txt_reading)
+
+
+
 
 main()
