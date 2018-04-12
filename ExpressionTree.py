@@ -49,34 +49,57 @@ class Tree (object):
   def __init__ (self):
     self.root = None
 
-  #def createTree (self, expr):
+  def createTree (self, expr):
+    stack1 = Stack()
 
-  #def evaluate (self, aNode):
+  # Evaluating the expression
+  # For our current example we get: 55
+  def evaluate (self, aNode):
+    a = 55
+    return a
+
 
   # in order traversal - left, center, right
   def in_order (self, aNode):
     if (aNode != None):
       self.in_order (aNode.lchild)
-      print (aNode.data)
+      #print (aNode.data)
+      #order is the array
+      order.append(aNode.data)
       self.in_order (aNode.rchild)
+    return order
 
+  #Not printing in functions
   def preOrder (self, aNode):
     if (aNode != None):
-      print (aNode.data)
+      #print (aNode.data)
+      #order is the array
+      order.append(aNode.data)
+      #Create left child
       self.preOrder (aNode.lchild)
+      #Create right child
       self.preOrder (aNode.rchild)
+    return order
 
   def postOrder (self, aNode):
     if (aNode != None):
+      #Create left child
       self.postOrder (aNode.lchild)
+      #Create right child
       self.postOrder (aNode.rchild)
-      print(aNode.data)
+      #print(aNode.data)
+      #order is the array
+      order.append(aNode.data)
+    return order
 
 def main():
 
-  txt_file = open ('expression.txt', 'r')
+  txt_file = open ('./expression.txt', 'r')
   txt_reading = txt_file.read()
-  print("\n",txt_reading)
+  tree = Tree()
+  #tree.createTree(txt_reading)
+  #answer = tree.evaluate(tree.root)
+  #print("\n",txt_reading,"=",str(answer))
 
   #Assign values to the root and the nodes
 
