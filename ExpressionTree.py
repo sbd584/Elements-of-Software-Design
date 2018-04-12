@@ -79,8 +79,11 @@ class Tree (object):
       self.pre_order (aNode.lchild)
       self.pre_order (aNode.rchild)
 
-  #def postOrder (self, aNode):
-    #if (aNode != None):
+  def postOrder (self, aNode):
+    if (aNode != None):
+      self.post_order (aNode.lchild)
+      self.post_order (aNode.rchild)
+      print (aNode.data)
 
 def main():
 
