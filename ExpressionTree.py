@@ -51,6 +51,8 @@ class Tree (object):
 
   def createTree (self, expr):
     stack1 = Stack()
+    order = expr.split()
+    cur
 
   # Evaluating the expression
   # For our current example we get: 55
@@ -58,9 +60,8 @@ class Tree (object):
     a = 55
     return a
 
-
   # in order traversal - left, center, right
-  def in_order (self, aNode):
+  def in_order (self, aNode, order):
     if (aNode != None):
       self.in_order (aNode.lchild)
       #print (aNode.data)
@@ -70,7 +71,7 @@ class Tree (object):
     return order
 
   #Not printing in functions
-  def preOrder (self, aNode):
+  def preOrder (self, aNode, order):
     if (aNode != None):
       #print (aNode.data)
       #order is the array
@@ -81,7 +82,7 @@ class Tree (object):
       self.preOrder (aNode.rchild)
     return order
 
-  def postOrder (self, aNode):
+  def postOrder (self, aNode, order):
     if (aNode != None):
       #Create left child
       self.postOrder (aNode.lchild)
@@ -94,15 +95,19 @@ class Tree (object):
 
 def main():
 
-  txt_file = open ('./expression.txt', 'r')
+  txt_file = open ('expression.txt', 'r')
   txt_reading = txt_file.read()
   tree = Tree()
   #tree.createTree(txt_reading)
   #answer = tree.evaluate(tree.root)
+  print("\n",str(txt_reading)+"=")
   #print("\n",txt_reading,"=",str(answer))
 
   #Assign values to the root and the nodes
-
+  print("Prefix Expression: ")
+  # print
+  print("Postfix Expression: ")
+  # print
 
 
 
