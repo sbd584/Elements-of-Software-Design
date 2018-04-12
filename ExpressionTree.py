@@ -18,7 +18,24 @@
 
 #  Date Last Modified:
 
-#class Stack (object):
+class Stack (object):
+  def __init__(self):
+    self.items = []
+
+  def isEmpty(self):
+    return self.items == []
+
+  def push(self,item):
+    self.item.append(item)
+
+  def pop(self):
+    return self.items.pop()
+
+  def peek(self):
+    return self.items[len(self.items)-1]
+
+  def size(self):
+    return len(self.items)
 
 class Node (object):
 
@@ -32,35 +49,9 @@ class Tree (object):
   def __init__ (self):
     self.root = None
 
-  # search for a node with a key
-  def search (self, key):
-    current = self.root
-    while (current != None) and (current.data != key):
-      if (key < current.data):
-        current = current.lchild
-      else:
-        current = current.rchild
-    return current
+  #def createTree (self, expr):
 
-  # insert a node in a tree
-  def insert (self, val):
-    new_node = Node (val)
-
-    if (self.root == None):
-      self.root = new_node
-    else:
-      current = self.root
-      parent = self.root
-      while (current != None):
-        parent = current
-        if (val < current.data):
-          current = current.lchild
-        else:
-          current = current.rchild
-      if (val < parent.data):
-        parent.lchild = new_node
-      else:
-        parent.rchild = new_node
+  #def evaluate (self, aNode):
 
   # in order traversal - left, center, right
   def in_order (self, aNode):
@@ -69,27 +60,25 @@ class Tree (object):
       print (aNode.data)
       self.in_order (aNode.rchild)
 
-  #def createTree (self, expr):
-
-  #def evaluate (self, aNode):
-
   def preOrder (self, aNode):
     if (aNode != None):
       print (aNode.data)
-      self.pre_order (aNode.lchild)
-      self.pre_order (aNode.rchild)
+      self.preOrder (aNode.lchild)
+      self.preOrder (aNode.rchild)
 
   def postOrder (self, aNode):
     if (aNode != None):
-      self.post_order (aNode.lchild)
-      self.post_order (aNode.rchild)
-      print (aNode.data)
+      self.postOrder (aNode.lchild)
+      self.postOrder (aNode.rchild)
+      print(aNode.data)
 
 def main():
 
   txt_file = open ('expression.txt', 'r')
   txt_reading = txt_file.read()
   print("\n",txt_reading)
+
+  #Assign values to the root and the nodes
 
 
 
