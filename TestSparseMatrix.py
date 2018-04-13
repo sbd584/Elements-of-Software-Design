@@ -1,27 +1,4 @@
 
-# File: TestSparseMatrix.py
-
-# Description: Sparse matrix representation has a 1-D list where each
-#              element in that list is a linked list having the column
-#              number and non-zero data in each link
-
-#  Student Name: Luis Carlos Orozco
-
-#  Student UT EID: lco372
-
-#  Partner Name: Samuel Beck Dillon
-
-#  Partner UT EID: sbd584
-
-#  Course Name: CS 313E
-
-#  Unique Number:  51335 - sbd584
-
-#  Unique Number: 51340 - lco372
-
-#  Date Created: April 4th, 2018
-
-#  Date Last Modified: April 8th, 2018
 
 class Link (object):
   def __init__ (self, col = 0, data = 0, next = None):
