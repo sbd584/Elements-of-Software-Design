@@ -1,23 +1,5 @@
-#  File: ExpressionTree.py
 
-#  Description:
-
-#  Student's Name:
-
-#  Student's UT EID:
-
-#  Partner's Name:
-
-#  Partner's UT EID:
-
-#  Course Name: CS 313E
-
-#  Unique Number:
-
-#  Date Created:
-
-#  Date Last Modified:
-
+# Develop stack class with push and pop methods
 class Stack (object):
   def __init__(self):
     self.items = []
@@ -37,6 +19,7 @@ class Stack (object):
   def size(self):
     return len(self.items)
 
+# Node class
 class Node (object):
 
   def __init__ (self, data):
@@ -44,6 +27,7 @@ class Node (object):
     self.lchild = None
     self.rchild = None
 
+# Main Tree class
 class Tree (object):
 
   def __init__ (self):
@@ -51,27 +35,36 @@ class Tree (object):
 
   def createTree (self, expr):
     stk = Stack()
-    operators = ["*","/","+","-"]
+    operators = ["*", "/", "+", "-"]
     equation = []
     equation = expr.split()
     current = self.root
 
+    # Go through the expression characters and append through the tree's children
     for val in equation:
+      # Check for first parenthesis
       if (val == "("):
         current.lchild = Node(None)
         stk.push(current)
         current = current.lchild
+      # Check for operators
       elif (val in operators):
         current.data = val
         stk.push(current)
         current.rchild = Node(None)
         current = current.rchild
+
+      # Check for numbers
       elif (val.isdigit()):
         current.data = val
         current = stk.pop()
+
+      # Check for dots
       elif ("." in val):
         current.data = val
         current = stk.pop()
+
+      # Check for second parenthesis
       elif (val == ")"):
         if (stk.isEmpty() is False):
           current = stk.pop()
@@ -79,35 +72,44 @@ class Tree (object):
   # Evaluating the expression
   # For our current example we get: 55
   def evaluate (self, aNode):
-    # Check digits
+    # Check for digits
     if aNode.data.isdigit():
       return eval(aNode.data)
-    # Check dots
-    elif ('.' in aNode.data):
+    
+    # Check for dots
+    elif ("." in aNode.data):
       return eval(aNode.data)
+
+    # Multiply if asterisk notation
     elif (aNode.data == "*"):
       return (self.evaluate(aNode.lchild) * self.evaluate(aNode.rchild))
+
+    # Divide if slash notation
     elif aNode.data == '/':
       return (self.evaluate(aNode.lchild) / self.evaluate(aNode.rchild))
+
+    # Add if sumation notation
     elif aNode.data == '+':
       return (self.evaluate(aNode.lchild) + self.evaluate(aNode.rchild))
+
+    # Subtract if subtraction notation
     elif aNode.data == '-':
       return (self.evaluate(aNode.lchild) - self.evaluate(aNode.rchild))
 
   # in order traversal - left, center, right
   def in_order (self, aNode, order):
     if (aNode != None):
-      #Create left child
+      # Create left child
       self.in_order (aNode.lchild, order)
-      #print (aNode.data)
-      #order is the array
+      # print (aNode.data)
+      # order is the array
       order.append(aNode.data)
-      #Create right child
+      # Create right child
       self.in_order (aNode.rchild, order)
       
     return order
 
-  #Not printing in functions
+  # pre order traversal - center, left, right
   def preOrder (self, aNode, order):
     if (aNode != None):
       #print (aNode.data)
@@ -120,6 +122,7 @@ class Tree (object):
       
     return order
 
+  # post order traversal - left, right, center
   def postOrder (self, aNode, order):
     if (aNode != None):
       #Create left child
@@ -138,22 +141,17 @@ def main():
   txt_reading = txt_file.read()
   tree1 = Tree()
   tree1.createTree(txt_reading)
-  #answer = tree.evaluate(tree.root)
-  print(str(txt_reading),"=", end = " ")
-  print(tree1.evaluate(tree1.root), "\n")
+  print(str(txt_reading) + " = "+ str(tree1.evaluate(tree1.root)) + "\n")
   
   #Assign values to the root and the nodes
   print("Prefix Expression:", end = " " )
-  for i in (tree1.preOrder(tree1.root,[])):
+  for i in (tree1.preOrder(tree1.root, [])):
     print(str(i), end = " ")
     
   print("\n")
   print("Postfix Expression:", end = " " )
-  for i in (tree1.postOrder(tree1.root,[])):
+  for i in (tree1.postOrder(tree1.root, [])):
     print(str(i), end = ' ')
   print()
-  # print
-
-
-
+  
 main()
