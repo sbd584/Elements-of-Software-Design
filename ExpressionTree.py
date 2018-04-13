@@ -50,23 +50,57 @@ class Tree (object):
     self.root = None
 
   def createTree (self, expr):
-    stack1 = Stack()
-    order = expr.split()
-    cur
+    stk = Stack()
+    eqn = expr.split()
+    cur = self.root
+
+    for val in eqn:
+      if (val == '('):
+        cur.lchild = Node(None)
+        stk.push(cur)
+        cur = cur.lchild
+      elif(val in ['*','/','+','-']):
+        cur.data = val
+        stk.push(cur)
+        cur.rchild = Node(None)
+        cur = cur.rchild
+      elif(val.isdigit()):
+        cur.data = val
+        cur = stk.pop()
+      elif('.' in val):
+        cur.data = val
+        cur = stk.pop()
+      elif(val == ')'):
+        if(len(self.stack) != 0):
+          cur = stk.pop()
 
   # Evaluating the expression
   # For our current example we get: 55
   def evaluate (self, aNode):
-    a = 55
-    return a
+    # Check digits
+    if aNode.data.isdigit():
+      return eval(aNode.data)
+    # Check dots
+    elif ('.' in aNode.data):
+      return eval(aNode.data)
+    elif aNode.data == '*':
+      return (self.evaluate(aNode.rchild) * self.evaluate(aNode.lchild))
+    elif aNode.data == '/':
+      return (self.evaluate(aNode.rchild) / self.evaluate(aNode.lchild))
+    elif aNode.data == '+':
+      return (self.evaluate(aNode.rchild) + self.evaluate(aNode.lchild))
+    elif aNode.data == '-':
+      return (self.evaluate(aNode.rchild) - self.evaluate(aNode.lchild))
 
   # in order traversal - left, center, right
   def in_order (self, aNode, order):
     if (aNode != None):
+      #Create left child
       self.in_order (aNode.lchild)
       #print (aNode.data)
       #order is the array
       order.append(aNode.data)
+      #Create right child
       self.in_order (aNode.rchild)
     return order
 
@@ -97,16 +131,19 @@ def main():
 
   txt_file = open ('expression.txt', 'r')
   txt_reading = txt_file.read()
-  tree = Tree()
-  #tree.createTree(txt_reading)
+  tree1 = Tree()
+  tree1.createTree(txt_reading)
   #answer = tree.evaluate(tree.root)
-  print("\n",str(txt_reading)+"=")
-  #print("\n",txt_reading,"=",str(answer))
+  print("\n",str(txt_reading),"=")
+  #print("\n",txt_reading,"=",tree1.evaluate(tree1.root))
 
   #Assign values to the root and the nodes
-  print("Prefix Expression: ")
+  print("Prefix Expression:", end = " " )
+  print ("answer")
   # print
-  print("Postfix Expression: ")
+  print("Postfix Expression:", end = " " )
+  print ("answer")
+  print()
   # print
 
 
