@@ -1,6 +1,6 @@
 #  File: Boxes.py
 
-#  Description: Assignment 6 — Nesting Combinations of Boxes
+#  Description:
 
 #  Student Name:
 
