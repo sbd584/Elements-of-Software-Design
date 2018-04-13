@@ -113,17 +113,17 @@ class Tree (object):
       #order is the array
       order.append(aNode.data)
       #Create left child
-      self.preOrder (aNode.lchild)
+      self.preOrder (aNode.lchild,[])
       #Create right child
-      self.preOrder (aNode.rchild)
+      self.preOrder (aNode.rchild,[])
     return order
 
   def postOrder (self, aNode, order):
     if (aNode != None):
       #Create left child
-      self.postOrder (aNode.lchild)
+      self.postOrder (aNode.lchild,[])
       #Create right child
-      self.postOrder (aNode.rchild)
+      self.postOrder (aNode.rchild,[])
       #print(aNode.data)
       #order is the array
       order.append(aNode.data)
@@ -136,15 +136,20 @@ def main():
   tree1 = Tree()
   tree1.createTree(txt_reading)
   #answer = tree.evaluate(tree.root)
-  print("\n",str(txt_reading),"=", end = " ")
+  print("\n",str(txt_reading),"=", end = " " )
   print(tree1.evaluate(tree1.root))
+
+  pre = tree1.preOrder(tree1.root,[])
+  post = tree1.postOrder(tree1.root,[])
 
   #Assign values to the root and the nodes
   print("Prefix Expression:", end = " " )
-  print ("answer")
+  for i in pre:
+    print(str(i), end = ' ')
   # print
-  print("Postfix Expression:", end = " " )
-  print ("answer")
+  print("\n","Postfix Expression:", end = " " )
+  for i in post:
+    print(str(i), end = ' ')
   print()
   # print
 
