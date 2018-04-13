@@ -86,13 +86,13 @@ class Tree (object):
     elif ('.' in aNode.data):
       return eval(aNode.data)
     elif aNode.data == '*':
-      return (self.evaluate(aNode.rchild) * self.evaluate(aNode.lchild))
+      return (self.evaluate(aNode.lchild) * self.evaluate(aNode.rchild))
     elif aNode.data == '/':
-      return (self.evaluate(aNode.rchild) / self.evaluate(aNode.lchild))
+      return (self.evaluate(aNode.lchild) / self.evaluate(aNode.rchild))
     elif aNode.data == '+':
-      return (self.evaluate(aNode.rchild) + self.evaluate(aNode.lchild))
+      return (self.evaluate(aNode.lchild) + self.evaluate(aNode.rchild))
     elif aNode.data == '-':
-      return (self.evaluate(aNode.rchild) - self.evaluate(aNode.lchild))
+      return (self.evaluate(aNode.lchild) - self.evaluate(aNode.rchild))
 
   # in order traversal - left, center, right
   def in_order (self, aNode, order):
@@ -139,11 +139,10 @@ def main():
   print("\n",str(txt_reading),"=", end = " " )
   print(tree1.evaluate(tree1.root))
 
-  #Assign values to the root and the nodes
   print("Prefix Expression:", end = " " )
   for i in (tree1.preOrder(tree1.root,[])):
     print(str(i), end = ' ')
-  print()
+
   print("\n","Postfix Expression:", end = " " )
   for i in (tree1.postOrder(tree1.root,[])):
     print(str(i), end = ' ')
