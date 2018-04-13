@@ -136,8 +136,8 @@ def main():
   tree1 = Tree()
   tree1.createTree(txt_reading)
   #answer = tree.evaluate(tree.root)
-  print("\n",str(txt_reading),"=")
-  #print("\n",txt_reading,"=",tree1.evaluate(tree1.root))
+  print("\n",str(txt_reading),"=", end = " ")
+  print(tree1.evaluate(tree1.root))
 
   #Assign values to the root and the nodes
   print("Prefix Expression:", end = " " )
