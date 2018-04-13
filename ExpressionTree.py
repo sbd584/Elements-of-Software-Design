@@ -20,22 +20,22 @@
 
 class Stack (object):
   def __init__(self):
-    self.items = []
+    self.stack = []
 
   def isEmpty(self):
-    return self.items == []
+    return (len(self.stack) == 0)
 
   def push(self,item):
-    self.item.append(item)
+    self.stack.append(item)
 
   def pop(self):
-    return self.items.pop()
+    return self.stack.pop()
 
   def peek(self):
-    return self.items[len(self.items)-1]
+    return self.stack[len(self.stack)-1]
 
   def size(self):
-    return len(self.items)
+    return len(self.stack)
 
 class Node (object):
 
@@ -47,17 +47,17 @@ class Node (object):
 class Tree (object):
 
   def __init__ (self):
-    self.root = None
+    self.root = Node(None)
 
   def createTree (self, expr):
+    cur = self.root
     stk = Stack()
     eqn = expr.split()
-    cur = self.root
 
     for val in eqn:
       if (val == '('):
-        cur.lchild = Node(None)
         stk.push(cur)
+        cur.lchild = Node(None)
         cur = cur.lchild
       elif(val in ['*','/','+','-']):
         cur.data = val
@@ -71,8 +71,10 @@ class Tree (object):
         cur.data = val
         cur = stk.pop()
       elif(val == ')'):
-        if(len(self.stack) != 0):
+        if(stk.isEmpty() is False):
           cur = stk.pop()
+        else:
+          break
 
   # Evaluating the expression
   # For our current example we get: 55
