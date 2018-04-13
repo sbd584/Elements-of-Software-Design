@@ -194,6 +194,56 @@ class Tree (object):
         successor.rchild = delete_node.rchild
 
       return delete_node
+    
+    #### IS_SIMILAR BEGINS ####
+    # Returns true if two binary trees are similar
+    def is_similar (self, pNode):
+      current1 = self.root
+      current2 = pNode.root
+      checker = False
+
+      print(current1.data)
+      print(current2.data)
+
+      # Exclusive statement in case no nodes exist whatsoever // Trees will be similar
+      if ((current1 == None) and (currrent2 == None)):
+        checker = True
+    
+      # While loop checking node is existent
+      #while (current1 != None):
+      # Traverse left children
+      while ((current1.lchild != None) and (current2.lchild != None)):
+        if ((current1.data) == (current2.data)):
+          checker = True
+
+        else:
+          checker = False
+
+        current1 = current1.lchild
+        current2 = current2.lchild
+
+      # Re-Initialize the Tree's node position
+      current1 = self.root
+      current2 = pNode.root
+
+      # Traverse right children
+      while ((current1.rchild != None) and (current2.rchild != None)):
+        if ((current1.data) == (current2.data)):
+          checker = True
+
+        else:
+          checker = False
+
+        current1 = current1.rchild
+        current2 = current2.rchild
+        
+      if (checker):
+        return True
+
+      else:
+        return False
+      
+    #### IS_SIMILAR ENDS ####
 
 def main():
     # Create three trees - two are the same and the third is different
