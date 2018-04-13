@@ -29,20 +29,20 @@ class Node (object):
 class Tree (object):
 
   def __init__ (self):
-    self.root = Node(None)
+    self.root = None
 
   # Returns true if two binary trees are similar
-  def is_similar (self, pNode):
+  #def is_similar (self, pNode):
 
   # Prints out all nodes at the given level
-  def print_level (self, level):
+  #def print_level (self, level):
 
   # Returns the height of the tree
-  def get_height (self):
+  #def get_height (self):
 
   # Returns the number of nodes in the left subtree and
   # the number of nodes in the right subtree and the root
-  def num_nodes (self):
+  #def num_nodes (self):
 
 # search for a node with a key
   def search (self, key):
@@ -211,9 +211,24 @@ def main():
     #print("Tree A and B are similar: ", a_tree.is_similar(b_tree))
     #print("Tree A and C are similar: ", a_tree.is_similar(c_tree))
     #print("Tree B and C are similar: ", b_tree.is_similar(c_tree))
+    print()
 
     # Print the various levels of two of the trees that are different
+    print("Tree A's levels: ")
+    #for i in range(1,16):
+        #a_tree.printLevel(i)
+    print("Tree C's levels: ")
+    #for i in range(1,16):
+        #c_tree.printLevel(i)
 
     # Get the height of the two trees that are different
-
+    #print("Tree A's height is: ", a_tree.get_height())
+    #print("Tree C's height is: ", c_tree.get_height())
+    print()
     # Get the total numbe of nodes a binary search tree
+    #print("Tree A has ", a_tree.numNodes(), " number of nodes")
+    #print("Tree B has ", b_tree.numNodes(), " number of nodes")
+    #print("Tree C has ", c_tree.numNodes(), " number of nodes")
+    print()
+
+main()
