@@ -32,7 +32,51 @@ class Tree (object):
     self.root = None
 
   # Returns true if two binary trees are similar
-  #def is_similar (self, pNode):
+  def is_similar (self, pNode):
+    current1 = self.root
+    current2 = pNode.root
+    checker = False
+
+    print(current1.data)
+    print(current2.data)
+
+    # Exclusive statement in case no nodes exist whatsoever // Trees will be similar
+    if ((current1 == None) and (currrent2 == None)):
+      checker = True
+
+    # While loop checking node is existent
+    #while (current1 != None):
+    # Traverse left children
+    while ((current1.lchild != None) and (current2.lchild != None)):
+      if ((current1.data) == (current2.data)):
+        checker = True
+
+      else:
+        checker = False
+
+      current1 = current1.lchild
+      current2 = current2.lchild
+
+    # Re-Initialize the Tree's node position
+    current1 = self.root
+    current2 = pNode.root
+
+    # Traverse right children
+    while ((current1.rchild != None) and (current2.rchild != None)):
+      if ((current1.data) == (current2.data)):
+        checker = True
+
+      else:
+        checker = False
+
+      current1 = current1.rchild
+      current2 = current2.rchild
+
+    if (checker):
+      return True
+
+    else:
+      return False
 
   # Prints out all nodes at the given level
   #def print_level (self, level):
@@ -80,170 +124,6 @@ class Tree (object):
       self.in_order (aNode.lchild)
       print (aNode.data)
       self.in_order(aNode.rchild)
-
-  # pre order traversal - center, left, right
-  def pre_order (self, aNode):
-    if (aNode != None):
-      print (aNode.data)
-      self.pre_order (aNode.lchild)
-      self.pre_order (aNode.rchild)
-
-  # post order traversal - left, right, center
-  def post_order (self, aNode):
-    if (aNode != None):
-      self.post_order (aNode.lchild)
-      self.post_order (aNode.rchild)
-      print (aNode.data)
-
-  # return the node with minimum value
-  def min_node (self):
-    current = self.root
-
-    if (current == None):
-      return None
-
-    while (current.lchild != None):
-      current = current.lchild
-
-    return current
-
-
-
-  # return the node with maximum value
-  def max_node (self):
-    current = self.root
-
-    return current
-
-
-  # delete a node with a given key
-  def delete (self, key):
-    delete_node = self.root
-    parent = self.root
-    is_left = False
-
-    # if empty tree
-    if (delete_node == None):
-      return None
-
-    # find the delete node
-    while (delete_node != None) and (delete_node.data != key):
-      parent = delete_node
-      if (key < delete_node.data):
-        delete_node = delete_node.lchild
-        is_left = True
-      else:
-        delete_node = delete_node.rchild
-        is_left = False
-
-    # if node not found
-    if (delete_node == None):
-      return None
-
-    # check if delete node is a leaf node
-    if (delete_node.lchild == None) and (delete_node.rchild == None):
-       if (delete_node == self.root):
-         self.root = None
-       elif (is_left):
-         parent.lchild = None
-       else:
-         parent.rchild = None
-
-    # delete node is a node with only a left child
-    elif (delete_node.rchild == None):
-      if (delete_node == self.root):
-        self.root = delete_node.lchild
-      elif (is_left):
-        parent.lchild = delete_node.lchild
-      else:
-        parent.rchild = delete_node.lchild
-
-    # delete node is a node with only a right child
-    #elif (delete_node.lchild == None):
-      #if (delete_node == self.root):
-        #self.root = delete_node.rchild
-      #elif (is_left):
-        #parent.lchild = delete_node.rchild
-      #else:
-        #parent.rchild = delete_node.rchild
-
-    # delete node has both left and right children
-    else:
-      # find delete node's successor and the successor's parent node
-      successor = delete_node.rchild
-      successor_parent = delete_node
-
-      while (successor.lchild != None):
-        successor_parent = successor
-        successor = successor.lchild
-
-      # successor node is right child of delete node
-      if (delete_node == self.root):
-        self.root = successor
-      elif (is_left):
-        parent.lchild = successor
-      else:
-        parent.rchild = successor
-
-      # connect delete node's left child to be the successor's left child
-      successor.lchild = delete_node.lchild
-
-      # successor node left descendant of delete node
-      if (successor != delete_node.rchild):
-        successor_parent.lchild = successor.rchild
-        successor.rchild = delete_node.rchild
-
-      return delete_node
-    
-    #### IS_SIMILAR BEGINS ####
-    # Returns true if two binary trees are similar
-    def is_similar (self, pNode):
-      current1 = self.root
-      current2 = pNode.root
-      checker = False
-
-      print(current1.data)
-      print(current2.data)
-
-      # Exclusive statement in case no nodes exist whatsoever // Trees will be similar
-      if ((current1 == None) and (currrent2 == None)):
-        checker = True
-    
-      # While loop checking node is existent
-      #while (current1 != None):
-      # Traverse left children
-      while ((current1.lchild != None) and (current2.lchild != None)):
-        if ((current1.data) == (current2.data)):
-          checker = True
-
-        else:
-          checker = False
-
-        current1 = current1.lchild
-        current2 = current2.lchild
-
-      # Re-Initialize the Tree's node position
-      current1 = self.root
-      current2 = pNode.root
-
-      # Traverse right children
-      while ((current1.rchild != None) and (current2.rchild != None)):
-        if ((current1.data) == (current2.data)):
-          checker = True
-
-        else:
-          checker = False
-
-        current1 = current1.rchild
-        current2 = current2.rchild
-        
-      if (checker):
-        return True
-
-      else:
-        return False
-      
-    #### IS_SIMILAR ENDS ####
 
 def main():
     # Create three trees - two are the same and the third is different
