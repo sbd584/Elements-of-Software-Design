@@ -31,8 +31,55 @@ class Tree (object):
   def __init__ (self):
     self.root = None
 
+  # Prints out all nodes at the given level
+  #def print_level (self, level):
+
+  # Returns the height of the tree
+  #def get_height (self):
+
+  # Returns the number of nodes in the left subtree and
+  # the number of nodes in the right subtree and the root
+  #def num_nodes (self):
+
+# search for a node with a key
+  def search (self, key):
+    current = self.root
+    while (current != None) and (current.data != key):
+      if (key < current.data):
+        current = current.lchild
+      else:
+        current = current.rchild
+        
+    return current
+
+  # insert a node in a tree
+  def insert (self, val):
+    new_node = Node (val)
+
+    if (self.root == None):
+      self.root = new_node
+      
+    else:
+      current = self.root
+      parent = self.root
+      
+      while (current != None):
+        parent = current
+        if (val < current.data):
+          current = current.lchild
+          
+        else:
+          current = current.rchild
+          
+      if (val < parent.data):
+        parent.lchild = new_node
+        
+      else:
+        parent.rchild = new_node
+
+  ### is_similar using while loops ###
   # Returns true if two binary trees are similar
-  def is_similar (self, pNode):
+  def is_similar_alt (self, pNode):
     current1 = self.root
     current2 = pNode.root
     checker = False
@@ -44,7 +91,7 @@ class Tree (object):
     # Exclusive statement in case no nodes exist whatsoever // Trees will be similar
     if ((current1 == None) and (currrent2 == None)):
       checker = True
-
+    
     # While loop checking node is existent
     #while (current1 != None):
     # Traverse left children
@@ -76,92 +123,103 @@ class Tree (object):
 
       current1 = current1.rchild
       current2 = current2.rchild
-
+        
     if (checker):
       return True
 
     else:
       return False
 
+  ### is_similar using while loops ends ###
+
+  
+  # Returns true if two binary trees are similar
+  def is_similar (self, pNode):
+    return self.identical (self.root, pNode.root)
+
+  # Helper function for is_similar
+  def identical (self, aNode, bNode):
+    if (aNode == None) and (bNode == None):
+      return True
+
+    if (aNode != None) and (bNode != None):
+      print(str(aNode.data) + " " + str(bNode.data))
+      return ((aNode.data == bNode.data) and
+              (self.identical (aNode.lchild, bNode.lchild)) and
+              (self.identical (aNode.rchild, bNode.rchild)))
+
+    return False
+                                                                     
   # Prints out all nodes at the given level
   def print_level (self, level):
-    current1 = self.root
-    current2 = self.root
-    count = 0
+    if (self.root == None):
+      return 0
+
+    #if (self.root == ):
+
+    #while (count <= level):
+
+      #if (count == level):
+        #s = 
+      #s = str(current1
+      #current1 = current1.
 
   # Returns the height of the tree
-  #def get_height (self):
+  def get_height (self):
+    return self.height(self.root)
 
+  def height (self, aNode):
+    return 1 + max(self.height(aNode.lchild) if aNode.lchild != None else 0,
+                   self.height(aNode.rchild) if aNode.rchild != None else 0)
 
   # Returns the number of nodes in the left subtree and
   # the number of nodes in the right subtree and the root
   def num_nodes (self):
     count = self.add_helper(self.root)
-
     return count
-
+  
+  # Helper function for num_nodes // Adds the number of nodes in a tree up
   def add_helper (self, aNode):
     if (aNode == None):
       return 0
     else:
       return self.add_helper(aNode.lchild) + 1 + self.add_helper(aNode.rchild)
 
-# search for a node with a key
-  def search (self, key):
-    current = self.root
-    while (current != None) and (current.data != key):
-      if (key < current.data):
-        current = current.lchild
-      else:
-        current = current.rchild
-    return current
-
-  # insert a node in a tree
-  def insert (self, val):
-    new_node = Node (val)
-
-    if (self.root == None):
-      self.root = new_node
-    else:
-      current = self.root
-      parent = self.root
-      while (current != None):
-        parent = current
-        if (val < current.data):
-          current = current.lchild
-        else:
-          current = current.rchild
-      if (val < parent.data):
-        parent.lchild = new_node
-      else:
-        parent.rchild = new_node
-
-  # in order traversal - left, center, right
-  def in_order (self, aNode):
-    if (aNode != None):
-      self.in_order (aNode.lchild)
-      print (aNode.data)
-      self.in_order(aNode.rchild)
-
 def main():
     # Create three trees - two are the same and the third is different
     a_tree = Tree()
     c_tree = Tree()
-    val1 = random.randint(0,20)
-    val2 = random.randint(0,20)
-    for i in range(val1):
+    vals = 10
+    for i in range(vals):
       a_tree.insert(random.randint(1,50))
-
-    for j in range(val2):
       c_tree.insert(random.randint(1,50))
 
     b_tree = a_tree
+    
+    d_tree = Tree()
+    e_tree = Tree()
+
+    d_tree.insert(1)
+    d_tree.insert(4)
+    d_tree.insert(7)
+    
+    e_tree.insert(4)
+    e_tree.insert(1)
+    e_tree.insert(7)
+    e_tree.insert(11)
+    
+    #b_tree.insert(11)
     # Test your method is_similar()
 
+    print(type(a_tree))
+
+    print(a_tree.root.data)
+    print(c_tree.root.data)
+
     print()
-    print("Tree A and B are similar: ", a_tree.is_similar(b_tree))
-    print("Tree A and C are similar: ", a_tree.is_similar(c_tree))
-    print("Tree B and C are similar: ", b_tree.is_similar(c_tree))
+    print("Tree A and B are similar: ", str(d_tree.is_similar(e_tree)))
+    #print("Tree A and C are similar: ", a_tree.is_similar(c_tree))
+    #print("Tree B and C are similar: ", b_tree.is_similar(c_tree))
     print()
 
     # Print the various levels of two of the trees that are different
@@ -173,13 +231,13 @@ def main():
         #c_tree.printLevel(i)
 
     # Get the height of the two trees that are different
-    #print("Tree A's height is: ", a_tree.get_height())
-    #print("Tree C's height is: ", c_tree.get_height())
+    print("Tree A's height is: ", a_tree.get_height())
+    print("Tree E's height is: ", e_tree.get_height())
     print()
-    # Get the total number of nodes a binary search tree
-    print("Tree A has ", a_tree.num_nodes(), " number of nodes")
-    print("Tree B has ", b_tree.num_nodes(), " number of nodes")
-    print("Tree C has ", c_tree.num_nodes(), " number of nodes")
+    # Get the total numbe of nodes a binary search tree
+    print("Tree A has " + str(a_tree.num_nodes()) + " number of nodes.")
+    print("Tree D has " + str(d_tree.num_nodes()) + " number of nodes.")
+    print("Tree E has " + str(e_tree.num_nodes()) + " number of nodes.")
     print()
 
 main()
