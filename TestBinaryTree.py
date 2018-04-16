@@ -30,28 +30,7 @@ class Tree (object):
 
   def __init__ (self):
     self.root = None
-
-  # Prints out all nodes at the given level
-  #def print_level (self, level):
-
-  # Returns the height of the tree
-  #def get_height (self):
-
-  # Returns the number of nodes in the left subtree and
-  # the number of nodes in the right subtree and the root
-  #def num_nodes (self):
-
-# search for a node with a key
-  def search (self, key):
-    current = self.root
-    while (current != None) and (current.data != key):
-      if (key < current.data):
-        current = current.lchild
-      else:
-        current = current.rchild
-        
-    return current
-
+  
   # insert a node in a tree
   def insert (self, val):
     new_node = Node (val)
@@ -77,23 +56,18 @@ class Tree (object):
       else:
         parent.rchild = new_node
 
-  ### is_similar using while loops ###
+  ### is_similar using while loops ### // FOR TESTING PURPOSES
+  ##### NOT ACTUALLY IMPLEMENTED TO RUN ON THE PROGRAM #######
   # Returns true if two binary trees are similar
   def is_similar_alt (self, pNode):
     current1 = self.root
     current2 = pNode.root
     checker = False
 
-    # Remove this
-    print(current1.data)
-    print(current2.data)
-
     # Exclusive statement in case no nodes exist whatsoever // Trees will be similar
     if ((current1 == None) and (currrent2 == None)):
       checker = True
-    
-    # While loop checking node is existent
-    #while (current1 != None):
+      
     # Traverse left children
     while ((current1.lchild != None) and (current2.lchild != None)):
       print(current1.data)
@@ -131,7 +105,7 @@ class Tree (object):
       return False
 
   ### is_similar using while loops ends ###
-
+  #### ORIGINAL FUNCTIONS BEGIN ###########
   
   # Returns true if two binary trees are similar
   def is_similar (self, pNode):
@@ -143,7 +117,6 @@ class Tree (object):
       return True
 
     if (aNode != None) and (bNode != None):
-      print(str(aNode.data) + " " + str(bNode.data))
       return ((aNode.data == bNode.data) and
               (self.identical (aNode.lchild, bNode.lchild)) and
               (self.identical (aNode.rchild, bNode.rchild)))
@@ -210,11 +183,6 @@ def main():
     
     #b_tree.insert(11)
     # Test your method is_similar()
-
-    print(type(a_tree))
-
-    print(a_tree.root.data)
-    print(c_tree.root.data)
 
     print()
     print("Tree A and B are similar: ", str(d_tree.is_similar(e_tree)))
