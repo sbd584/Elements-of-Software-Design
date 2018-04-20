@@ -55,58 +55,7 @@ class Tree (object):
 
       else:
         parent.rchild = new_node
-
-  ### is_similar using while loops ### // FOR TESTING PURPOSES
-  ##### NOT ACTUALLY IMPLEMENTED TO RUN ON THE PROGRAM #######
-  # Returns true if two binary trees are similar
-  def is_similar_alt (self, pNode):
-    current1 = self.root
-    current2 = pNode.root
-    checker = False
-
-    # Exclusive statement in case no nodes exist whatsoever // Trees will be similar
-    if ((current1 == None) and (currrent2 == None)):
-      checker = True
-
-    # Traverse left children
-    while ((current1.lchild != None) and (current2.lchild != None)):
-      print(current1.data)
-      print(current2.data)
-      if ((current1.data) == (current2.data)):
-        checker = True
-
-      else:
-        checker = False
-
-      current1 = current1.lchild
-      current2 = current2.lchild
-
-    # Re-Initialize the Tree's node position
-    current1 = self.root
-    current2 = pNode.root
-
-    # Traverse right children
-    while ((current1.rchild != None) and (current2.rchild != None)):
-      print(current1.data)
-      print(current2.data)
-      if ((current1.data) == (current2.data)):
-        checker = True
-
-      else:
-        checker = False
-
-      current1 = current1.rchild
-      current2 = current2.rchild
-
-    if (checker):
-      return True
-
-    else:
-      return False
-
-  ### is_similar using while loops ends ###
-  #### ORIGINAL FUNCTIONS BEGIN ###########
-
+        
   # Returns true if two binary trees are similar
   def is_similar (self, pNode):
     return self.identical (self.root, pNode.root)
