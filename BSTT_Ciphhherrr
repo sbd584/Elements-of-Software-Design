@@ -106,6 +106,20 @@ class Tree (object):
   # character in the binary search tree. It will return an empty string
   # if the input parameter does not lead to a valid character in the tree.
   def traverse (self, st):
+    current = self.root
+    if (st == "*"):
+      return current.data
+    else:
+      for i in st:
+        if current == None:
+          return ""
+        else:
+          if current == ">"
+            current = current.rchild
+          elif current == "<"
+            current = current.lchild
+
+    return current.data
 
   # the encrypt() function will take a string as input parameter, convert
   # it to lower case, and return the encrypted string. It will ignore
