@@ -75,6 +75,7 @@ class Tree (object):
   # (<) and rights (>) needed to reach that character. It will
   # return a blank string if the character does not exist in the tree.
   # It will return * if the character is the root of the tree.
+  # Works(Wooo)
   def search (self, ch):
     direction_string = ""
     left = '<'
