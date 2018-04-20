@@ -1,4 +1,4 @@
-#  File: BSTTTT_Ciphfffeer.py
+#  File: BST_Cipher.py
 
 #  Description:
 
@@ -12,7 +12,7 @@
 
 #  Course Name: CS 313E
 
-#  Unique Number: 
+#  Unique Number:
 
 #  Date Created:
 
@@ -35,8 +35,8 @@ class Tree (object):
     for i in encrypt_str:
       if (i.isalpha() == True):
         self.insert(i)
-        
-    
+
+
 
   # the insert() function adds a node containing a character in
   # the binary search tree. If the character already exists, it
@@ -47,11 +47,11 @@ class Tree (object):
 
     if (self.root == None):
       self.root = new_node
-      
+
     else:
       current = self.root
       parent = self.root
-      
+
       while (current != None):
         parent = current
         if (ch < current.data):
@@ -59,13 +59,13 @@ class Tree (object):
 
         elif (ch == current.data):
           break
-        
+
         else:
           current = current.rchild
-          
+
       if (ch < parent.data):
         parent.lchild = new_node
-        
+
       else:
         parent.rchild = new_node
 
@@ -75,9 +75,34 @@ class Tree (object):
   # return a blank string if the character does not exist in the tree.
   # It will return * if the character is the root of the tree.
   def search (self, ch):
+    direction_string = ""
+    left = '<'
+    right = '>'
+    root_star = '*'
+    if (self.root != None):
+      current = self.root
+      parent = self.root
+
+      while (current != None):
+        parent = current
+        if (ch < current.data):
+          current = current.lchild
+          direction_string = direction_string + left
+        elif (ch == current.data):
+          break
+        else:
+          current = current.rchild
+          direction_string = direction_string + right
+
+      direction_string = root_star + direction_string
+
+      if (current == None):
+        direction_string = ""
+
+    return direction_string
 
   # the traverse() function will take string composed of a series of
-  # lefts (<) and rights (>) and return the corresponding 
+  # lefts (<) and rights (>) and return the corresponding
   # character in the binary search tree. It will return an empty string
   # if the input parameter does not lead to a valid character in the tree.
   def traverse (self, st):
@@ -90,3 +115,14 @@ class Tree (object):
   # the decrypt() function will take a string as input parameter, and
   # return the decrypted string.
   def decrypt (self, st):
+
+def main():
+    e_key = input("Enter encryption key: ")
+    #
+    #
+    e_string = input("Enter string to be encrypted: ")
+    #
+    #
+    d_string = input("Enter string to be encrypted: ")
+
+main()
