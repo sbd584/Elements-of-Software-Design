@@ -78,13 +78,14 @@ class Tree (object):
   # Works(Wooo)
   def search (self, ch):
     direction_string = ""
-    left = '<'
-    right = '>'
-    root_star = '*'
+    left = "<"
+    right = ">"
+    root_star = "*"
     if (self.root != None):
       current = self.root
       parent = self.root
-
+      if (current == ch):
+        return root_star
       while (current != None):
         parent = current
         if (ch < current.data):
@@ -95,8 +96,6 @@ class Tree (object):
         else:
           current = current.rchild
           direction_string = direction_string + right
-
-      direction_string = root_star + direction_string
 
       if (current == None):
         direction_string = ""
@@ -128,15 +127,33 @@ class Tree (object):
   # it to lower case, and return the encrypted string. It will ignore
   # all digits, punctuation marks, and special characters.
   def encrypt (self, st):
+  # Create new string with only letters
+  # Make the new_string lower case
+  # new_string = new_string.lower()
+  repeat_string = ""
+  new_string = ""
+
+
+
+  current = self.search(i)
+
+
+
+
+
+
 
   # the decrypt() function will take a string as input parameter, and
   # return the decrypted string.
+  # Use TRAVERSE
   def decrypt (self, st):
+
 
 def main():
     e_key = input("Enter encryption key: ")
     #
     #
+    # key_to_life = Tree(e_key)
     e_string = input("Enter string to be encrypted: ")
     #
     #
