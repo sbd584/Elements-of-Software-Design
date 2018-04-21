@@ -131,17 +131,20 @@ class Tree (object):
   # Make the new_string lower case
   # new_string = new_string.lower()
   repeat_string = ""
+  alpha_space_string = ""
   new_string = ""
+  # Make st Lower Case
+  stl = st.lower()
+  for i in stl:
+    if (i == "" or i.isalpha()):
+      if (repeat_string.find(i) != -1):
+        alpha_space_string = alpha_space_string + i
+        repeat_string = repeat_string + i
+  for i in alpha_space_string:
+    current = self.search(i)
+    new_string = new_string + encrypt + "!"
 
-
-
-  current = self.search(i)
-
-
-
-
-
-
+  return new_string[0:-1]
 
   # the decrypt() function will take a string as input parameter, and
   # return the decrypted string.
