@@ -21,36 +21,35 @@
 #  Date Last Modified: 4/02/2018
 
 class Link (object):
-  def __init__ (self, data, next = None, previous = None):
+  def __init__ (self, data, next = None):
     self.data = data
     self.next = next
-    self.previous = previous
 
 class CircularList (object):
   # Constructor
   def __init__ ( self ):
-    self.first = None
+    self.first = Link(None)
+    self.first.next = self.first
 
   # Insert an element (value) in the list
   def insert ( self, item ):
     first_one = self.first
     current = self.first
-    new_link = Link(item)
+    new_link = Link (item)
 
     if (first_one == None):
       first_one = new_link
-      new_link.next = first_one
+      new_link.next = current
       current = new_link
       return
-
-    current = self.first
-    while (current.next != self.first):
+    
+    while (current.next != first_one):
       current = current.next
 
     current.next = new_link
-    new_link.next = self.first
+    new_link.next = first_one
     new_link.previous = current
-        
+
   # Find the link with the given key (value)
   def find ( self, key ):
     first_key = self.first
@@ -126,28 +125,25 @@ class CircularList (object):
   def delete_helper( self, start, n):
     first_one = self.first
     current = self.find(start)
-    previous = self.first
+    pre = self.first
 
-    if (first_one == None):
-      return None
-    
-    while (previous.next != first_one):
-      previous = previous.next
+    count = 1
+
+    while (pre.next != first_one):
+      pre = pre.next
 
     while (current.data != start):
       if (current.next == first_one):
         return None
 
-      previous = current
+      pre = current
       current = current.next
-
-    count = 1
            
     while (count < (n)):
       current = current.next
       count += 1
 
-    #if (current == fir st_one):
+    #if (current == first_one):
       #first_one = current.next
 
     return current.data
@@ -155,15 +151,17 @@ class CircularList (object):
   # Return a string representation of a Circular List
   def __str__ ( self ):
 
-    first_one = self.first
+    first_one = self.first.next.next
+    current = self.first
     string = ""
 
     if (first_one == None):
       print("")
 
     else:
-      current = self.first
-      while (current.next != self.first):
+      string += str(current.data) + "  "
+      current.next
+      while (current != first_one):
         string += str(current.data) + "  "
         current = current.next
 
@@ -198,14 +196,12 @@ def main():
   # Establish the number of soldiers
   for key in range (1, n + 1):
     soldiers.insert(key)
-    print(key)
 
   print(soldiers)
 
   new_location = location
 
-  for i in range (n - 1):
-    print(new_location)
+  while (soldiers.first.next != soldiers.first):
     first_soldier = soldiers.delete_after(location, elim)
     last_soldier = soldiers.delete_helper(location, elim)
     last_location = last_soldier.data
@@ -213,9 +209,26 @@ def main():
     print(last_location)
 
   print()
-  print(soldiers.first.data)
+  print(soldiers)
 
   #while (soldiers.first.next != soldiers.f  irst):
+    
+    
+
+  #Test insert
+  linked1.insert(1)
+  print("insert 1")
+  print(linked1)
+  linked1.insert(3)
+  print("insert 3")
+  print(linked1)
+  linked1.insert(2)
+  print("insert 2 ")
+  print(linked1)
+  # Doesn't Work
+
+
+
 
   in_file.close()
   
