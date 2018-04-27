@@ -188,22 +188,42 @@ class Graph (object):
 
   # get edge weight between two vertices
   # return -1 if edge does not exist
-  def getEdgeWeight (self, fromVertexLabel, toVertexLabel):
-
+  def getEdgeWeight (self, fromVertex, toVertex):
+    edgeWeight = self.adjMat[self.getIndex(fromVertex)][self.getIndex(toVertex)]
+    if (edgeWeight == 0):
+      return -1
+    else:
+      return edgeWeight
 
   # get a list of immediate neighbors that you can go to from a vertex
   # return empty list if there are none
-  #def getNeighbors (self, vertexLabel):
+  def getNeighbors (self, vertexLabel):
+    neigh = []
+    for i in self.Vertices:
+      if(self.adjMat[self.getIndex(vertexLabel)][self.getIndex(i)] != 0):
+        neigh.append(self.Vertices[i])
+    return neigh
+
 
   # get a copy of the list of vertices
-  #def getVertices (self):
+  def getVertices (self):
+    verts = []
+    for i in self.Vertices:
+      verts.append(i)
+    return verts
 
   # delete an edge from the adjacency matrix
   # UnDirected: 2 way: delete both edges
-  #def deleteEdge (self, fromVertexLabel, toVertexLabel):
+  def deleteEdge (self, fromVertexLabel, toVertexLabel):
+    vert1 = self.getIndex(fromVertexLabel)
+    vert2 = self.getIndex(toVertexLabel)
+    self.adjMat[vert1][vert2] = 0
+    self.adjMat[vert2][vert1] = 0
+
 
   # delete a vertex from the vertex list and all edges from and
   # to it in the adjacency matrix
+  # getNeighbors has to work
   #def deleteVertex (self, vertexLabel):
 
 
@@ -284,10 +304,36 @@ def main():
   cities.bfs (startIndex)
   print()
 
-  #example = cities.getVertices()
-  #cityUno = str(example[0])
-  #cityDos = str(example[1])
-  #print(cityUno + " to " + cityDos + " edge weight: " + cities.getEdgeWeight (self, cityUno, cityDos))
+  example = cities.getVertices()
+  cityUno = str(example[0])
+  cityDos = str(example[1])
+  print(cityUno + " to " + cityDos + " edge weight: " + str(cities.getEdgeWeight (cityUno, cityDos)))
+
+  # Neighbors
+  #for i in range (numVertices):
+  #print ("Neighbors: " + str(cities.getNeighbors(startVertex)))
+  #print ()
+
+
+  # Delete Edge
+
+  print("Delete: " + cityUno + "" + cityDos)
+  print("Before :")
+  for i in range (len(cities.adjMat)):
+    for j in range (len(cities.adjMat)):
+      print(cities.adjMat[i][j], end = " ")
+    print()
+  print()
+  cities.deleteEdge(cityUno,cityDos)
+  print("Delete: " + cityUno + "" + cityDos)
+  print("After : ")
+  for i in range (len(cities.adjMat)):
+    for j in range (len(cities.adjMat)):
+      print(cities.adjMat[i][j], end = " ")
+    print()
+  print()
+
+  # Delete Vertex
 
 
 
