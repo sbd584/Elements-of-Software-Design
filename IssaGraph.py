@@ -1,22 +1,24 @@
 #  File: Graph.py
 
-#  Description:
+#  Description: Assignment 16 — Graphs: Edges and Vertices 
 
-#  Student Name:
+#  Student Name: Luis Carlos Orozco
 
-#  Student UT EID:
+#  Student UT EID: lco372
 
-#  Partner Name:
+#  Partner Name: Samuel Beck Dillon
 
-#  Partner UT EID:
+#  Partner UT EID: sbd584
 
 #  Course Name: CS 313E
 
-#  Unique Number:
+#  Unique Number:  51335 - sbd584
 
-#  Date Created:
+#  Unique Number: 51340 - lco372
 
-#  Date Last Modified:
+#  Date Created: 4/25/2018
+
+#  Date Last Modified: 4/27/2018
 
 
 class Stack (object):
@@ -135,9 +137,12 @@ class Graph (object):
     # create a Stack
     theStack = Stack()
 
+    # create a List
+    printed = []
+
     # mark vertex v as visited and push on the stack
     (self.Vertices[v]).visited = True
-    print (self.Vertices [v])
+    printed.append(self.Vertices [v].label)
     theStack.push (v)
 
     # vist other vertices according to depth
@@ -148,13 +153,14 @@ class Graph (object):
         u = theStack.pop()
       else:
         (self.Vertices[u]).visited = True
-        print (self.Vertices[u])
+        printed.append(self.Vertices[u].label)
         theStack.push(u)
     # the stack is empty let us reset the falgs
     nVert = len (self.Vertices)
     for i in range (nVert):
       (self.Vertices[i]).visited = False
 
+    return printed
 
 # Edit this
   # do breadth first search in a graph
@@ -162,10 +168,13 @@ class Graph (object):
     # create a Queue
     theQueue = Queue ()
 
+    # create a List
+    printed = []
+
     # Select a starting vertex(v) & make it current and mark it visited.
     #
     (self.Vertices[v]).visited = True
-    print (self.Vertices [v])
+    printed.append(self.Vertices [v].label)
     theQueue.enqueue(v)
 
     # vist other vertices according to breadth
@@ -176,7 +185,7 @@ class Graph (object):
 
       while (u2 != -1):
         (self.Vertices[u2]).visited = True
-        print (self.Vertices[u2])
+        printed.append(self.Vertices[u2].label)
         theQueue.enqueue(u2)
         u2 = self.getAdjUnvisitedVertex(u)
 
@@ -185,6 +194,7 @@ class Graph (object):
     for i in range (nVert):
       (self.Vertices[i]).visited = False
 
+    return printed
 
   # get edge weight between two vertices
   # return -1 if edge does not exist
@@ -198,12 +208,14 @@ class Graph (object):
   # get a list of immediate neighbors that you can go to from a vertex
   # return empty list if there are none
   def getNeighbors (self, vertexLabel):
-    neigh = []
-    for i in self.Vertices:
-      if(self.adjMat[self.getIndex(vertexLabel)][self.getIndex(i)] != 0):
-        neigh.append(self.Vertices[i])
-    return neigh
-
+    neighbors = []
+    index = self.getIndex(vertexLabel)
+    
+    for i in range (len(self.Vertices)):
+      if not (self.adjMat[index][i] == 0):
+        neighbors.append(self.Vertices[i].label)
+        
+    return neighbors
 
   # get a copy of the list of vertices
   def getVertices (self):
@@ -220,12 +232,20 @@ class Graph (object):
     self.adjMat[vert1][vert2] = 0
     self.adjMat[vert2][vert1] = 0
 
-
   # delete a vertex from the vertex list and all edges from and
   # to it in the adjacency matrix
   # getNeighbors has to work
-  #def deleteVertex (self, vertexLabel):
+  def deleteVertex (self, vertexLabel):
+      
+    for vertex in self.Vertices:
+      if (vertex.label == vertexLabel):
+  
+        index = self.getIndex(vertexLabel)
 
+        for i in range(len(self.adjMat)):
+          del self.adjMat[i][index]
+        
+        del self.adjMat[index]
 
 class Edge (object):
   def __init__ (self, towardsVertext, leavingVertex, weight = 1):
@@ -277,7 +297,7 @@ def main():
     cities.addDirectedEdge (start, finish, weight)
 
   # print the adjacency matrix
-  print ("\nAdjacency Matric")
+  print ("\nAdjacency Matrix")
   for i in range (numVertices):
     for j in range (numVertices):
       print (cities.adjMat[i][j], end = ' ')
@@ -296,37 +316,60 @@ def main():
 
   # do depth first search
   print ("\nDepth First Search from " + startVertex)
-  cities.dfs (startIndex)
+  city_list = cities.dfs (startIndex)
+  for city in (city_list):
+    print(city)
   print()
 
   # do breadth first search
   print ("\nBreadth First Search from " + startVertex)
-  cities.bfs (startIndex)
+  city_list = cities.bfs (startIndex)
+  for city in (city_list):
+    print(city)
   print()
 
+  # setting up citie's vertices/labels
   example = cities.getVertices()
-  cityUno = str(example[0])
-  cityDos = str(example[1])
-  print(cityUno + " to " + cityDos + " edge weight: " + str(cities.getEdgeWeight (cityUno, cityDos)))
+  SE = str(example[0])
+  SF = str(example[1])
+  LA = str(example[2])
+  DE = str(example[3])
+  KC = str(example[4])
+  CH = str(example[5])
+  BO = str(example[6])
+  NY = str(example[7])
+  AT = str(example[8])
+  MI = str(example[9])
+  DA = str(example[10])
+  HO = str(example[11])
+  
+  print(SE + " to " + SF + " Edge Weight: " + str(cities.getEdgeWeight (SE, SF)))
+  print()
 
   # Neighbors
-  #for i in range (numVertices):
-  #print ("Neighbors: " + str(cities.getNeighbors(startVertex)))
-  #print ()
+  print("Testing getNeighbors function:")
+  print()
+  
+  for i in range (numVertices):
+    print (str(example[i].label) + " Neighbors: " + str(cities.getNeighbors(str(example[i]))))
+  print ()
 
 
   # Delete Edge
 
-  print("Delete: " + cityUno + "" + cityDos)
-  print("Before :")
+  print("Testing deleteEdge function:")
+  print()
+  print("Delete: " + SE + "- " + SF)
+  print("Before:")
   for i in range (len(cities.adjMat)):
     for j in range (len(cities.adjMat)):
       print(cities.adjMat[i][j], end = " ")
     print()
   print()
-  cities.deleteEdge(cityUno,cityDos)
-  print("Delete: " + cityUno + "" + cityDos)
-  print("After : ")
+  
+  cities.deleteEdge(SE,SF)
+  
+  print("After: ")
   for i in range (len(cities.adjMat)):
     for j in range (len(cities.adjMat)):
       print(cities.adjMat[i][j], end = " ")
@@ -335,7 +378,24 @@ def main():
 
   # Delete Vertex
 
-
-
+  print("Testing deleteVertex function:")
+  print()
+  print("Delete: " + SE + ", " + SF)
+  print("Before:")
+  for i in range (len(cities.adjMat)):
+    for j in range (len(cities.adjMat)):
+      print(cities.adjMat[i][j], end = " ")
+    print()
+  print()
+  
+  cities.deleteVertex(SE)
+  cities.deleteVertex(SF)
+  
+  print("After: ")
+  for i in range (len(cities.adjMat)):
+    for j in range (len(cities.adjMat)):
+      print(cities.adjMat[i][j], end = " ")
+    print()
+  print()
 
 main()
