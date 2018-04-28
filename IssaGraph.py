@@ -1,24 +1,4 @@
-#  File: Graph.py
 
-#  Description: Assignment 16 — Graphs: Edges and Vertices 
-
-#  Student Name: Luis Carlos Orozco
-
-#  Student UT EID: lco372
-
-#  Partner Name: Samuel Beck Dillon
-
-#  Partner UT EID: sbd584
-
-#  Course Name: CS 313E
-
-#  Unique Number:  51335 - sbd584
-
-#  Unique Number: 51340 - lco372
-
-#  Date Created: 4/25/2018
-
-#  Date Last Modified: 4/27/2018
 
 
 class Stack (object):
